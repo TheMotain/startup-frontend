@@ -1,14 +1,19 @@
+// @flow
 import React from 'react'
 
-class Todos extends React.Component {
+type Props = {
+    onAddTodo: (string) => void
+}
 
-    constructor() {
-        super();
+type State = {
+    value: string
+}
 
-        this.state = {
-            value: ""
-        }
-    }
+class Todos extends React.Component<Props, State> {
+
+    state = {
+        value: ""
+    };
 
     render() {
         return (

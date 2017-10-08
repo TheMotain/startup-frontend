@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux'
 import * as TodoActions from '../../actions/TodoActions';
 import TodoList from '../../components/Todos/TodoList'

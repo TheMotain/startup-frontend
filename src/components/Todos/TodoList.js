@@ -1,25 +1,44 @@
+// @flow
+
 import React from 'react'
-import "./todoList.scss";
+import classnames from "classnames";
+import type {Todo} from '../../types/Todo';
 
-class Todos extends React.Component {
+import "./todoList.css";
+
+type Props = {
+    onTodoClick: (number) => void,
+    todos: Array<Todo>
+}
+
+class Todos extends React.Component<Props> {
 
 
-    renderTodo(todo) {
-        let classes = "";
+    renderTodo(todo: Todo) {
+        let classeNames: number = classnames({
+            "checked": todo.completed
+        });
 
-        if(todo.completed) classes = "checked";
+        return (
+            <li
+                className={classeNames}
+                onClick={() => this.props.onTodoClick(todo.id)}
+                key={todo.id}>
+                {todo.text}
+            </li>
+        );
+    }
 
-        return <li className={classes} onClick={() => this.props.onTodoClick(todo.id)} key={todo.id}>{todo.text}</li>;
+    renderTodos(todos: Array<Todo>) {
+        return todos.map(this.renderTodo.bind(this));
     }
 
     render() {
+        let {todos} = this.props;
+
         return (
-            <ul>
-                {
-
-                    this.props.todos.map(this.renderTodo.bind(this))
-
-                }
+            <ul className="todo-list">
+                {this.renderTodos(todos)}
             </ul>
         );
     }

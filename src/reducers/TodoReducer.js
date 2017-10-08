@@ -1,11 +1,13 @@
+// @flow
+import type {Todo} from "../types/Todo";
 
-const todos = (state = [], action) => {
+const todos = (state: Array<Todo> = [], action: Object) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 ...state,
                 {
-                    id: action.id,
+                    id: action.payload.id,
                     text: action.text,
                     completed: false
                 }

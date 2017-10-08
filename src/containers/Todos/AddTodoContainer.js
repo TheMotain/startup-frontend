@@ -1,7 +1,7 @@
+// @flow
 import { connect } from 'react-redux'
 import * as TodoActions from '../../actions/TodoActions';
 import AddTodo from '../../components/Todos/AddTodo';
-
 
 const mapStateToProps = (state) => ({
 
