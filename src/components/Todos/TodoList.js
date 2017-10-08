@@ -1,12 +1,15 @@
 import React from 'react'
+import "./todoList.scss";
 
 class Todos extends React.Component {
 
-    displayTodos() {
-        if(this.props.todos)
-        this.props.todos.map(todo =>
-            <li key={todo.id}>{todo.text}</li>
-        )
+
+    renderTodo(todo) {
+        let classes = "";
+
+        if(todo.completed) classes = "checked";
+
+        return <li className={classes} onClick={() => this.props.onTodoClick(todo.id)} key={todo.id}>{todo.text}</li>;
     }
 
     render() {
@@ -14,7 +17,7 @@ class Todos extends React.Component {
             <ul>
                 {
 
-
+                    this.props.todos.map(this.renderTodo.bind(this))
 
                 }
             </ul>

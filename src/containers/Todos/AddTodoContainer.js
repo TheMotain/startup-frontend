@@ -4,11 +4,11 @@ import AddTodo from '../../components/Todos/AddTodo';
 
 
 const mapStateToProps = (state) => ({
-    todos: state.todos
+
 });
 
 const mapDispatchToProps = {
-    onTodoClick: TodoActions.checkTodo
+    onAddTodo: TodoActions.addTodo
 };
 
 const AddTodoContainer = connect(

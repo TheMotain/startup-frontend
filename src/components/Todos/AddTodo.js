@@ -21,6 +21,7 @@ class Todos extends React.Component {
                 <button
                     onClick={() => {
                         this.props.onAddTodo(this.state.value);
+                        this.setState({value: ""})
                     }}
                 >
                     Add todo !

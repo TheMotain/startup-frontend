@@ -4,10 +4,11 @@ import TodoList from '../../components/Todos/TodoList'
 
 
 const mapStateToProps = (state) => ({
+    todos: state.todos
 });
 
 const mapDispatchToProps = {
-    onTodoClick: TodoActions.addTodo
+    onTodoClick: TodoActions.checkTodo
 };
 
 const TodoListContainer = connect(
