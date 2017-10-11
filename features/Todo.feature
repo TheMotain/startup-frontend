@@ -4,7 +4,6 @@ Feature: Todo list
   In order to manage my todos
 
   Scenario:
-    Given I have no todo
-    And I wrote "cook" on the input
     When I click on Add Todo Button
+    And I wrote "cook" on the input
     Then The todo "cook" is created

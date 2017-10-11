@@ -30,7 +30,7 @@ class Todos extends React.Component<Props> {
     }
 
     renderTodos(todos: Array<Todo>) {
-        return todos.map(this.renderTodo.bind(this));
+        return todos.map(todo => this.renderTodo(todo));
     }
 
     render() {

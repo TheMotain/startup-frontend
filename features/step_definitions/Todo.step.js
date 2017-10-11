@@ -5,12 +5,6 @@ cucumber.defineSupportCode(function ({Given, When, Then}) {
 
     let input;
 
-    Given('I have no todo', function (callback) {
-        // Write code here that turns the phrase above into concrete actions
-        callback();
-    });
-
-
     When('I wrote {string} on the input', function (string, callback) {
         // Write code here that turns the phrase above into concrete actions
         callback();
@@ -24,7 +18,7 @@ cucumber.defineSupportCode(function ({Given, When, Then}) {
 
 
     Then('The todo {string} is created', function (string, callback) {
-        assert.equal(true, true);
+        assert.equal(false, true);
         callback();
     });
 });

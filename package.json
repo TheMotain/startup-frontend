@@ -25,6 +25,10 @@
     "cucumberjs": "node_modules/.bin/cucumberjs"
   },
   "devDependencies": {
-    "cucumber": "^3.0.4"
+    "cucumber": "^3.0.4",
+    "selenium-standalone": "^6.9.0",
+    "wdio-cucumber-framework": "^1.0.2",
+    "wdio-dot-reporter": "0.0.9",
+    "webdriverio": "^4.8.0"
   }
 }

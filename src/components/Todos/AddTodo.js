@@ -9,7 +9,7 @@ type State = {
     value: string
 }
 
-class Todos extends React.Component<Props, State> {
+class AddTodo extends React.Component<Props, State> {
 
     state = {
         value: ""
@@ -36,4 +36,4 @@ class Todos extends React.Component<Props, State> {
     }
 }
 
-export default Todos;
+export default AddTodo;

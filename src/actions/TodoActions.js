@@ -11,18 +11,14 @@ function nextId() {
 export function addTodo(text: string) {
     return {
         type: ADD_TODO,
-        payload: {
-            id: nextId(),
-            text: text
-        }
+        id: nextId(),
+        text: text
     }
 }
 
 export function checkTodo(id: number) {
     return {
         type: CHECK_TODO,
-        payload: {
-            id: id
-        }
+        id: id
     }
 }

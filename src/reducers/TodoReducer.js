@@ -7,7 +7,7 @@ const todos = (state: Array<Todo> = [], action: Object) => {
             return [
                 ...state,
                 {
-                    id: action.payload.id,
+                    id: action.id,
                     text: action.text,
                     completed: false
                 }

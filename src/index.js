@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
 import './index.css';
-import TodoListContainer from './containers/Todos/TodoListContainer';
-import AddTodoContainer from './containers/Todos/AddTodoContainer';
+import MessageListContainer from './containers/Chat/MessageListContainer';
+import AddMessageContainer from './containers/Chat/AddMessageContainer';
 import registerServiceWorker from './registerServiceWorker';
 import store from "./Store";
+import "./channels/index";
 
 ReactDOM.render(
     <Provider store={store}>
         <div>
-            <TodoListContainer/>
-            <AddTodoContainer/>
+            <MessageListContainer/>
+            <AddMessageContainer />
         </div>
     </Provider>
     ,
