@@ -5,7 +5,7 @@ import MessageList from '../../components/Chat/MessageList'
 
 
 const mapStateToProps = (state) => ({
-    chatMessages: state.chat
+    chatMessages: Object.values(state.chat)
 });
 
 const mapDispatchToProps = {};

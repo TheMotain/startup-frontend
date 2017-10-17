@@ -6,7 +6,7 @@ import MessageListContainer from './containers/Chat/MessageListContainer';
 import AddMessageContainer from './containers/Chat/AddMessageContainer';
 import registerServiceWorker from './registerServiceWorker';
 import store from "./Store";
-import "./channels/index";
+import "./api/index";
 
 ReactDOM.render(
     <Provider store={store}>

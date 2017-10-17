@@ -1,6 +1,7 @@
 // @flow
 
 export type ChatMessage = {
-    author: string,
-    message: string
+    id?: number,
+    sender: string,
+    content: string
 };

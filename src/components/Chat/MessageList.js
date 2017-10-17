@@ -12,8 +12,8 @@ class MessageList extends React.Component<Props, State> {
 
     renderChatMessage(chatMessage: ChatMessage) {
         return (
-            <li>
-                {chatMessage.author} : {chatMessage.message}
+            <li key={chatMessage.id}>
+                {chatMessage.sender} : {chatMessage.content}
             </li>
         )
     }

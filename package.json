@@ -11,7 +11,9 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.14",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "sockjs-client": "^1.1.4",
+    "stompjs": "^2.3.3"
   },
   "scripts": {
     "flow": "flow",
@@ -26,9 +28,6 @@
   },
   "devDependencies": {
     "cucumber": "^3.0.4",
-    "selenium-standalone": "^6.9.0",
-    "wdio-cucumber-framework": "^1.0.2",
-    "wdio-dot-reporter": "0.0.9",
-    "webdriverio": "^4.8.0"
+    "selenium-standalone": "^6.9.0"
   }
 }

@@ -16,6 +16,14 @@ class AddMessage extends React.Component<Props, State> {
         message: ""
     };
 
+    sendMessage() {
+        this.props.postMessage({
+            content: this.state.message,
+            sender: "toto"
+        });
+        this.setState({message: ""});
+    }
+
     render() {
         return (
             <div>
@@ -24,15 +32,16 @@ class AddMessage extends React.Component<Props, State> {
                     onChange={e => {
                         this.setState({message: e.target.value});
                     }}
+                    value={this.state.message}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            this.sendMessage()
+                        }
+                    }}
                 />
                 <button
                     onClick={() => {
-                        console.log("postMessage");
-                        this.props.postMessage({
-                            message: this.state.message,
-                            author: "toto"
-                        });
-                        this.setState({message: ""});
+                        this.sendMessage()
                     }}
                 >
                     Poster
