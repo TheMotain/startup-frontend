@@ -11,8 +11,10 @@ import "./api/index";
 ReactDOM.render(
     <Provider store={store}>
         <div>
-            <MessageListContainer/>
             <AddMessageContainer />
+            <MessageListContainer/>
+            <MessageListContainer/>
+            <MessageListContainer/>
         </div>
     </Provider>
     ,
