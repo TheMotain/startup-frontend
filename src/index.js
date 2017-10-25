@@ -13,8 +13,6 @@ ReactDOM.render(
         <div>
             <AddMessageContainer />
             <MessageListContainer/>
-            <MessageListContainer/>
-            <MessageListContainer/>
         </div>
     </Provider>
     ,
