@@ -74,13 +74,6 @@ const getState = (store: Object) => {
     return store.classState;
 };
 
-
-export const getClasses = (store: Object) => {
-    let state = getState(store);
-    return state.classes.allIds.map(id => state.classes.byId[id]);
-};
-
-
 export const getPostStatus = (store: Object) => {
     let state = getState(store);
     return state.postStatus;
