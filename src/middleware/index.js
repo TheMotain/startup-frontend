@@ -10,15 +10,10 @@ const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
             actionCreators: {
-                setUserType: (userType: number) => {
-                    return {
-                        type: "SET_USER_TYPE",
-                        payload: userType
-                    };
-                }
+
             }
         }) : compose;
 
 export const middleware = composeEnhancers(
-    applyMiddleware(thunk, promiseMiddleware()),
+    applyMiddleware(promiseMiddleware()),
 );

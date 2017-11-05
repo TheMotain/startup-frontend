@@ -7,9 +7,13 @@ export function isAlpha(input: string) {
 }
 
 export function isAlphaNum(input: any) {
+    return matchRegex(/^[A-Za-z0-9 \-']*$/, input);
+}
+
+export function matchRegex(regex: any, input: any) {
     if (typeof input !== 'string' && typeof input !== 'number') return false;
     let clearedString = StringUtils.removeDiacritics(input + "");
-    return /^[A-Za-z0-9 \-']*$/.test(clearedString);
+    return regex.test(clearedString);
 }
 
 export function isEmpty(input: any) {
@@ -21,7 +25,6 @@ export function isEmpty(input: any) {
     return !input;
 }
 
-export function isNumeric(input: string) {
-    if (typeof input !== 'string' && typeof input !== 'number') return false;
-    return /^[0-9 ]*$/.test(input + "");
+export function isNumeric(input: any) {
+    return matchRegex(/^[0-9 ]*$/, input)
 }

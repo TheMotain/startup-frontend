@@ -2,6 +2,7 @@
 import type {ChatMessage} from "../types/ChatMessage";
 import * as ChatActions from "../actions/ChatActions";
 
+
 type State = {[number]: ChatMessage}
 
 const chat = (state: State = {}, action: Object) => {

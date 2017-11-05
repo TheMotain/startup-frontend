@@ -1,6 +1,6 @@
 // @flow
 
-export type Class = {
+export type Classroom = {
     id?: number,
     name: string
 };

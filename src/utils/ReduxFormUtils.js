@@ -6,13 +6,6 @@ import React, {Component} from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
 
-
-function add(a: number) {
-    return a;
-}
-
-add("a");
-
 /************************/
 /*    INPUT RENDERERS   */
 /************************/
@@ -42,6 +35,8 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
 export const maxLength = (max: number) => (value: any) => {
     return value && value.length > max ? `Ce champ doit faire au plus ${max} caractères.` : undefined;
 };
+
+export const maxLength30 = maxLength(30);
 
 export const minLength = (min: number) => (value: any) => {
     return value && value.length < min ? `Ce champ doit faire au moins ${min} caractères.` : undefined;

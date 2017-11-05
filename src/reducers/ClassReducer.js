@@ -1,41 +1,87 @@
 // @flow
 import * as ClassActions from "../actions/ClassActions";
-import type {Class} from "../types/Class";
-import type {PostStatus, updatePosted, updatePosting, updatePostError} from "./ReducerUtils";
+import type {Classroom} from "../types/Classroom";
+import * as ReducerUtils from "./ReducerUtils";
+import update from "immutability-helper";
 
 type State = {
     classes: {
-        byId: { [number]: Class },
+        byId: { [number]: Classroom },
         allIds: Array<number>
     },
-    postStatus: PostStatus
+    postStatus: ReducerUtils.PostStatus
 }
 
-const reducer = (state: State = {}, action: Object) => {
+const initialState: State = {
+    classes: {
+        byId: {},
+        allIds: []
+    },
+    postStatus: ReducerUtils.createPostStatus()
+};
+
+const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
     switch (action.type) {
         case ClassActions.POST_CLASS_PENDING:
-            return {
-                ...state,
-                postStatus: updatePosting(state.postStatus)
-            };
+            return update(state, {
+                postStatus: {
+                    $set: ReducerUtils.updatePosting(state.postStatus)
+                }
+            });
 
         case ClassActions.POST_CLASS_FULFILLED:
-            return {
-                ...state,
-                classes: {
+            let classroom: Classroom = action.payload;
 
+            if (!classroom.id) return state;
+            let classroomId: number = classroom.id;
+
+            return update(state, {
+                postStatus: {
+                    $set: ReducerUtils.updatePosted(state.postStatus),
                 },
-                postStatus: updatePosted(state.postStatus)
-            };
+                classes: {
+                    byId: {
+                        [classroomId]: {
+                            $set: classroom
+                        }
+                    },
+                    allIds: {
+                        $push: [classroomId]
+                    }
+                }
+            });
 
         case ClassActions.POST_CLASS_REJECTED:
-            return {
-                ...state,
-                postStatus: updatePostError(state.postStatus, action.payload)
-            };
+            return update(state, {
+                postStatus: {
+                    $set: ReducerUtils.updatePostError(state.postStatus, action.payload)
+                }
+            });
+
         default:
             return state
     }
 };
 
 export default reducer;
+
+
+/*************/
+/* SELECTORS */
+/*************/
+
+const getState = (store: Object) => {
+    return store.classState;
+};
+
+
+export const getClasses = (store: Object) => {
+    let state = getState(store);
+    return state.classes.allIds.map(id => state.classes.byId[id]);
+};
+
+
+export const getPostStatus = (store: Object) => {
+    let state = getState(store);
+    return state.postStatus;
+};
