@@ -1,26 +1,33 @@
 // @flow
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {renderTextField, required, minLength2} from "../../utils/ReduxFormUtils";
+import {renderTextField, required, minLength2, alphaNum} from "../../utils/ReduxFormUtils";
 import RaisedButton from "material-ui/RaisedButton";
 
-
 let CreateClassForm = props => {
-    const {handleSubmit, invalid} = props;
+    const {handleSubmit, invalid, onCancel} = props;
 
     return (
-        <form onSubmit={ handleSubmit }>
+        <form onSubmit={handleSubmit}>
             <Field
                 name="name"
                 component={renderTextField}
                 label="Nom de la classe"
-                validate={[required, minLength2]}
+                validate={[required, minLength2, alphaNum]}
             />
-            <RaisedButton
-                type="submit"
-                label="Créer"
-                disabled={invalid}
-            />
+            <div>
+                <RaisedButton
+                    type="submit"
+                    label="Créer"
+                    primary={true}
+                    disabled={invalid}
+                />
+                <RaisedButton
+                    label="Cancel"
+                    primary={false}
+                    onClick={onCancel}
+                />
+            </div>
         </form>
     )
 };

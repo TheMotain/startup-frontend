@@ -2,20 +2,13 @@
  * Created by louis on 31/10/17.
  */
 // @flow
-import React, {Component} from "react";
+import React from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
 
 /************************/
 /*    INPUT RENDERERS   */
 /************************/
-
-const errorField = ({touched, error}) => {
-    return (
-        touched && (error && <span className="error">{error}</span>)
-    );
-};
-
 
 export const renderTextField = ({input, label, meta: {touched, error}, custom}: Object) => (
     <TextField
@@ -26,7 +19,6 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
         {...custom}
     />
 );
-
 
 /*********************/
 /* FIELD VERIFICATOR */
@@ -47,7 +39,7 @@ export const minLength2 = minLength(2);
 export const minLength1 = minLength(1);
 
 export const alphaNum = (value: any) => {
-    return value && !FormUtils.isAlphaNum(value) ? "Ce champ doit être composé de lettres, chiffres, - et '." : undefined;
+    return value && !FormUtils.isAlphaNum(value) ? "Le nom de la classe ne doit contenir que des caractères alphanumériques, espaces, - et _." : undefined;
 };
 
 export const numeric = (value: any) => {
@@ -60,4 +52,8 @@ export const alpha = (value: any) => {
 
 export const required = (value: any) => {
     return FormUtils.isEmpty(value) ? "Ce champ est obligatoire." : undefined;
+};
+
+export const matchRegex = (regex: any, error: string) => (value: any) => {
+    return !FormUtils.matchRegex(regex, value) ? error : undefined;
 };

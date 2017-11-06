@@ -5,7 +5,8 @@ let ENDPOINT;
 if (process.env.NODE_ENV === 'production') {
     ENDPOINT = "http://localhost:8080";
 } else {
-    ENDPOINT = "/placeholder";
+    //ENDPOINT = "/placeholder";
+    ENDPOINT = "http://172.18.13.114:8080/"
 }
 
 const getApiInstance = () => {
@@ -22,10 +23,9 @@ const getApiInstance = () => {
     axiosInstance.interceptors.response.use(function (response) {
         return response.data; // unwrap data response
     }, function (error) {
-        console.error(error); // Log error in console
-        // If there is error data, return the error.
+        // If there is error data, return the error array.
         if(error.response && error.response.data) {
-            return Promise.reject(error.response);
+            return Promise.reject(error.response.data);
         }
 
         // Else return default error message

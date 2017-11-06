@@ -15,7 +15,7 @@ describe("classActions.js", () => {
 
     test('postClass', () => {
         let classroom: Classroom = {
-            name: "test"
+            className: "test"
         };
 
         let actual = ClassActions.postClass(classroom);

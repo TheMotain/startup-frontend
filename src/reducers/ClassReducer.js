@@ -32,7 +32,7 @@ const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
         case ClassActions.POST_CLASS_FULFILLED:
             let classroom: Classroom = action.payload;
 
-            if (!classroom.id) return state;
+            if (classroom.id === undefined) return state;
             let classroomId: number = classroom.id;
 
             return update(state, {
@@ -72,6 +72,11 @@ export default reducer;
 
 const getState = (store: Object) => {
     return store.classState;
+};
+
+export const getClasses = (store: Object) => {
+    let state = getState(store);
+    return state.classes.allIds.map(id => state.classes.byId[id]);
 };
 
 export const getPostStatus = (store: Object) => {

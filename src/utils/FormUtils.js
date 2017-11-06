@@ -7,7 +7,7 @@ export function isAlpha(input: string) {
 }
 
 export function isAlphaNum(input: any) {
-    return matchRegex(/^[A-Za-z0-9 \-']*$/, input);
+    return matchRegex(/^[a-zA-Z0-9\-_ ']*$/, input);
 }
 
 export function matchRegex(regex: any, input: any) {

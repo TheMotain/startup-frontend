@@ -14,14 +14,15 @@ type Props = {
 };
 
 type State = {
-    open: boolean;
+    open: boolean,
+    serverErrors: Array<string>
 }
 
-class CreateClass extends Component {
+class CreateClass extends Component<Props, State> {
 
-    props: Props;
-    state: State = {
-        open: false
+    state = {
+        open: false,
+        serverErrors: []
     };
 
     handleOpen() {
@@ -33,13 +34,21 @@ class CreateClass extends Component {
     };
 
     onSubmit(form: Object) {
-        console.log(form);
-        this.props.onPostClass(form).then(() => {
+        let classroom: Classroom = {
+            className: form.name
+        };
+
+        this.props.onPostClass(classroom).then(() => {
             this.handleClose();
+        }, (errors) => {
+            this.setState({
+                serverErrors: errors
+            })
         });
     }
 
     render() {
+
         return (
             <div>
                 <FloatingActionButton onClick={this.handleOpen.bind(this)}>
@@ -50,7 +59,8 @@ class CreateClass extends Component {
                     modal={true}
                     open={this.state.open}
                 >
-                    <CreateClassForm onSubmit={this.onSubmit.bind(this)}/>
+                    <CreateClassForm onSubmit={this.onSubmit.bind(this)} onCancel={this.handleClose.bind(this)}/>
+                    {this.state.serverErrors.map(error => <p>{error}</p>)}
                 </Dialog>
             </div>
         );
