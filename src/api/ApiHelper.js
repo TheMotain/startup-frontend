@@ -5,8 +5,7 @@ let ENDPOINT;
 if (process.env.NODE_ENV === 'production') {
     ENDPOINT = "http://localhost:8080";
 } else {
-    //ENDPOINT = "/placeholder";
-    ENDPOINT = "http://172.18.13.114:8080/"
+    ENDPOINT = "http://172.18.13.114:8080/";
 }
 
 const getApiInstance = () => {
@@ -29,7 +28,7 @@ const getApiInstance = () => {
         }
 
         // Else return default error message
-        return Promise.reject("Erreur inconnue, veuillez contacter le support.");
+        return Promise.reject(["Erreur inconnue, veuillez contacter le support."]);
     });
     return axiosInstance;
 };
