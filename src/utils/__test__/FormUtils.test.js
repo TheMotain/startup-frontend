@@ -9,16 +9,16 @@ describe("FormUtils.js", async () => {
         expect(FormUtils.isAlpha("alpha")).toBe(true);
     });
 
+    test('isAlpha alpha accent', () => {
+        expect(FormUtils.isAlpha("èéà")).toBe(true);
+    });
+
     test('isAlpha alpha space', () => {
         expect(FormUtils.isAlpha("alpha characters")).toBe(true);
     });
 
     test('isAlpha alphanum', () => {
         expect(FormUtils.isAlpha("alpha with 42")).toBe(false);
-    });
-
-    test('isAlpha number', () => {
-        expect(FormUtils.isAlpha(42)).toBe(false);
     });
 
     test('isAlpha empty', () => {
@@ -32,6 +32,10 @@ describe("FormUtils.js", async () => {
     // ALPHANUM
     test('isAlphaNum alpha', () => {
         expect(FormUtils.isAlphaNum("alpha")).toBe(true);
+    });
+
+    test('isAlphaNum alpha accent', () => {
+        expect(FormUtils.isAlphaNum("àéèç")).toBe(true);
     });
 
     test('isAlphaNum alpha space, - _ and ', () => {

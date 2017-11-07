@@ -8,7 +8,7 @@ import * as StringUtils from "./StringUtils";
  */
 export function isAlpha(input: string): boolean {
     if (typeof input !== 'string') return false;
-    return /^[A-Za-z ]*$/.test(StringUtils.removeDiacritics(input));
+    return matchRegex(/^[A-Za-z ]*$/, input);
 }
 
 /**

@@ -113,7 +113,17 @@ for (let i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
     }
 }
 
-// "what?" version ... http://jsperf.com/diacritics/12
+/**
+ * replace special characters from string.
+ * For example.
+ * Œ => EO
+ * é, è, ê => e
+ * ...
+ *
+ * Useful to prepare the input to test if a string is alphanum without testing every accents for example
+ * @param str
+ * @returns {string}
+ */
 export function removeDiacritics(str: string) {
     if(typeof str !== "string") throw new Error("l'entrée doit être une chaine de caractère");
 
@@ -123,7 +133,7 @@ export function removeDiacritics(str: string) {
 }
 
 /**
- * Check if str2 exists in a substring of str2 (without special characters or uppercase/lowercase)
+ * Check if str2 exists in a substring of str1 (without special characters or uppercase/lowercase)
  * @param str1 source string (where to search)
  * @param str2 target string (what to search)
  * @returns {boolean}
@@ -136,11 +146,20 @@ export function specialContains(str1: string, str2: string) {
     return str1Clean.includes(str2Clean) || false;
 }
 
-
+/**
+ * Replace <br /> (or any variant like <br>) to \n
+ * @param str
+ * @returns {string}
+ */
 export function brToNl(str: string) {
     return str.replace(/<br[ ]*[/]{0,1}>/g, "\n");
 }
 
+/**
+ * Replace \n to <br />
+ * @param str
+ * @returns {string}
+ */
 export function nlToBr(str: string) {
     return str.replace(/\n/g, "<br />");
 }

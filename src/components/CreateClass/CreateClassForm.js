@@ -23,7 +23,7 @@ let CreateClassForm = props => {
                     disabled={invalid}
                 />
                 <RaisedButton
-                    label="Cancel"
+                    label="Annuler"
                     primary={false}
                     onClick={onCancel}
                 />
