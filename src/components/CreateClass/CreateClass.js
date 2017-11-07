@@ -35,7 +35,7 @@ class CreateClass extends Component<Props, State> {
 
     onSubmit(form: Object) {
         let classroom: Classroom = {
-            className: form.name
+            className: form.className
         };
 
         this.props.onPostClass(classroom).then(() => {

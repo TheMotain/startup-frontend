@@ -6,6 +6,7 @@ import CreateClass from "../CreateClass";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from "material-ui/Dialog";
+import RaisedButton from "material-ui/RaisedButton";
 
 describe('<CreateClass />', () => {
 
@@ -53,6 +54,8 @@ describe('<CreateClass />', () => {
         const wrapper = createElement();
         wrapper.find(FloatingActionButton).simulate('click');
 
-        expect(wrapper.find(Dialog).props().open).toBe(true);
+        wrapper.find(RaisedButton).simulate('click');
+        expect(wrapper.find(Dialog).props().open).toBe(false);
     });
+
 });

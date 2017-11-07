@@ -10,7 +10,7 @@ let CreateClassForm = props => {
     return (
         <form onSubmit={handleSubmit}>
             <Field
-                name="name"
+                name="className"
                 component={renderTextField}
                 label="Nom de la classe"
                 validate={[required, minLength2, alphaNum]}
