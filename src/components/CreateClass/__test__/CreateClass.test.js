@@ -49,13 +49,5 @@ describe('<CreateClass />', () => {
 
         expect(wrapper.find(Dialog).props().open).toBe(true);
     });
-
-    it("Should close dialog if click cancel button of form", () => {
-        const wrapper = createElement();
-        wrapper.find(FloatingActionButton).simulate('click');
-
-        wrapper.find(RaisedButton).simulate('click');
-        expect(wrapper.find(Dialog).props().open).toBe(false);
-    });
-
+    
 });
