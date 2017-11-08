@@ -75,8 +75,8 @@ class CreateClass extends Component<Props, State> {
 
     render() {
         return (
-            <div>
-                <FloatingActionButton onClick={this.handleOpen.bind(this)} secondary={true}>
+            <div className="create-class">
+                <FloatingActionButton onClick={this.handleOpen.bind(this)} secondary={true} className="add-button">
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog
@@ -85,7 +85,11 @@ class CreateClass extends Component<Props, State> {
                     open={this.state.open}
                     className="dialog-title"
                 >
-                    <CreateClassForm onSubmit={this.onSubmit.bind(this)} onCancel={this.handleClose.bind(this)}/>
+                    <CreateClassForm
+                        onSubmit={this.onSubmit.bind(this)}
+                        onCancel={this.handleClose.bind(this)}
+                        isLoading={this.props.postStatus.posting}
+                    />
                     {this.state.serverErrors.map(error => <p>{error}</p>)}
                 </Dialog>
             </div>

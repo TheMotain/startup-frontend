@@ -44,9 +44,8 @@ Feature: Create a new class
 
   Scenario: Create a new class empty name
     Given I am in the home page
-    And I click the button to add a new class
-    When I click on the submit button
-    Then a message error is displaying
+    When I click the button to add a new class
+    Then the submit button is disabled
     And the class is not created
 
 
