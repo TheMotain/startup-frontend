@@ -5,13 +5,22 @@ import CreateClass from "../../components/CreateClass/CreateClass"
 import * as ClassSelectors from "../../reducers/ClassReducer";
 import * as ClassActions from "../../actions/ClassActions";
 
-const mapStateToProps = (state) => {
+/**
+ * Mapping entre le store (global) et les props requises pour le composant CreateClass
+ * @param store
+ * @returns {{postStatus}}
+ */
+const mapStateToProps = (store: Object) => {
     return {
-        postStatus: ClassSelectors.getPostStatus(state)
+        postStatus: ClassSelectors.getPostStatus(store)
     };
 
 };
 
+/**
+ * Mapping entre les actions et les props requises pour le composant CreateClass
+ * @type {{onPostClass: postClass}}
+ */
 const mapDispatchToProps = {
     onPostClass: ClassActions.postClass
 };

@@ -5,6 +5,10 @@
 import {applyMiddleware, compose} from "redux";
 import promiseMiddleware from "redux-promise-middleware";
 
+/**
+ * Ajoute le plugin redux_devtools si présent dans le navigateur.
+ *
+ */
 const composeEnhancers =
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?

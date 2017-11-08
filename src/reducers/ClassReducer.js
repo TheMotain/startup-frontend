@@ -4,6 +4,14 @@ import type {Classroom} from "../types/Classroom";
 import * as ReducerUtils from "./ReducerUtils";
 import update from "immutability-helper";
 
+/**
+ * Etat du state class :
+ * classes:
+ *  byId: map idClasse => classe
+ *  allIds: Tableau idClass
+ *
+ * postStatus: état de la requête d'ajout de classe.
+ */
 type State = {
     classes: {
         byId: { [number]: Classroom },
@@ -20,6 +28,12 @@ const initialState: State = {
     postStatus: ReducerUtils.createPostStatus()
 };
 
+/**
+ * Reducer pour la classe.
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
     switch (action.type) {
         case ClassActions.POST_CLASS_PENDING:

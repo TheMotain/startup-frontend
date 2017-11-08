@@ -5,6 +5,12 @@ import * as ChatActions from "../actions/ChatActions";
 
 type State = {[number]: ChatMessage}
 
+/**
+ * Reducer pour le chat
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 const chat = (state: State = {}, action: Object) => {
     switch (action.type) {
         case ChatActions.RECEIVE_MESSAGE:
