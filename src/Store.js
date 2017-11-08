@@ -1,9 +1,10 @@
-import { createStore } from 'redux'
-import reducer from './reducers'
+import {compose, createStore} from "redux";
+import reducer from "./reducers";
+import {middleware} from "./middleware/index";
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    compose(middleware)
 );
 
 export default store;
