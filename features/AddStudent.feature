@@ -20,7 +20,16 @@ Feature: Add a new student to a class
 
 
 
-  Scenario : display list of student to add failed - empty list 
+  Scenario: no student whose name begins with the input 
+    Given I want to display the list of student whose name start with "ben"
+    And there is no student whose name begins with "ben"
+    When I wrote "ben" in the input
+    Then no student is displayed
+
+
+
+
+  Scenario: display list of student to add failed - empty list 
     Given the class CM1 exist
     And I want to add a student name "Nadia Ahassouni" to this class
     And this student is nonexistent
@@ -28,7 +37,7 @@ Feature: Add a new student to a class
     Then no student list is displayed
 
 
-  Scenario : display list of student to add failed - nonexistent student
+  Scenario: display list of student to add failed - nonexistent student
     Given the class CM1 exist
     And I want to add a student name "Nadia Ahassouni" to this class
     And this student is nonexistent
@@ -54,7 +63,7 @@ Feature: Add a new student to a class
 
 
 
-  Scenario : add a student in an existing class cancel 
+  Scenario: add a student in an existing class cancel 
     Given the class <className> exist
     And I want to add a student named <studentName> to this class
     When I wrote the begging of the student name in the input
@@ -65,7 +74,7 @@ Feature: Add a new student to a class
 
 
 
-  Scenario : add a student with empty input error
+  Scenario: add a student with empty input error
     Given the class CM1 exist
     And I want to add a student named "Pierre-Claver"to this class
     When I let the input empty
@@ -74,7 +83,7 @@ Feature: Add a new student to a class
     And no student is added to the class
 
 
-  Scenario : add a student name with invalid character got an error
+  Scenario: add a student name with invalid character got an error
     Given the class <className> exist
     And I want to add a student named "Helene Mayer" to this class
     When I wrote "@helene"
