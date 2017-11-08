@@ -4,7 +4,7 @@ Feature: Add a new student to a class
   In order to follow him
 
 
-  Scenario outline: 3 students whose name begins with the input are displayed
+  Scenario: 3 students whose name begins with the input are displayed
     Given I want to display the list of student whose name start with "ben"
     And there is 3 students whose name begins with "ben"
     When I wrote "ben" in the input
@@ -12,7 +12,7 @@ Feature: Add a new student to a class
 
 
 
-  Scenario outline: 1 student whose name begins with the input is displayed
+  Scenario: 1 student whose name begins with the input is displayed
     Given I want to display the list of student whose name start with "ben"
     And there is only one student whose name begins with "ben"
     When I wrote "ben" in the input
