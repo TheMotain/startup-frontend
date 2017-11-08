@@ -43,7 +43,7 @@ class CreateClass extends Component<Props, State> {
         }, (errors) => {
             this.setState({
                 serverErrors: errors
-            })
+            });
         });
     }
 

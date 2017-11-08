@@ -10,9 +10,10 @@ import RaisedButton from "material-ui/RaisedButton";
 
 describe('<CreateClass />', () => {
 
-    let onPostClass = jest.fn().mockImplementation(classroom => Promise.resolve);
+    let onPostClass;
 
     function createElement() {
+        onPostClass = jest.fn().mockReturnValue(Promise.resolve());
         let props = {
             postStatus: {
                 posting: false,
@@ -48,6 +49,21 @@ describe('<CreateClass />', () => {
         wrapper.find(FloatingActionButton).simulate('click');
 
         expect(wrapper.find(Dialog).props().open).toBe(true);
+    });
+
+
+    it("Call the submit function", () => {
+        const wrapper = createElement();
+
+        wrapper.instance().onSubmit({
+            className: "test"
+        });
+
+        expect(onPostClass.mock.calls.length).toBe(1);
+        expect(onPostClass.mock.calls[0][0]).toEqual({
+            className: "test"
+        });
+
     });
     
 });

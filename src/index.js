@@ -9,7 +9,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import ListClassContainer from "./containers/ListClass/ListClassContainer";
 import CreateClassContainer from "./containers/CreateClass/CreateClassContainer";
-import registerServiceWorker from "./registerServiceWorker";
 import store from "./Store";
 import "./index.css";
 import "./api/index";
@@ -40,4 +39,3 @@ ReactDOM.render(
     ,
     document.getElementById('root')
 );
-registerServiceWorker();
