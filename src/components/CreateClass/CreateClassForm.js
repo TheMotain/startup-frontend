@@ -19,12 +19,11 @@ let CreateClassForm = props => {
                 <RaisedButton
                     type="submit"
                     label="Créer"
-                    primary={true}
+                    secondary={true}
                     disabled={invalid}
                 />
                 <RaisedButton
                     label="Annuler"
-                    primary={false}
                     onClick={onCancel}
                 />
             </div>

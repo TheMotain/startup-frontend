@@ -51,13 +51,14 @@ class CreateClass extends Component<Props, State> {
 
         return (
             <div>
-                <FloatingActionButton onClick={this.handleOpen.bind(this)}>
+                <FloatingActionButton onClick={this.handleOpen.bind(this)} secondary={true}>
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog
                     title="Créer une classe"
                     modal={true}
                     open={this.state.open}
+                    className="dialog-title"
                 >
                     <CreateClassForm onSubmit={this.onSubmit.bind(this)} onCancel={this.handleClose.bind(this)}/>
                     {this.state.serverErrors.map(error => <p>{error}</p>)}
