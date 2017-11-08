@@ -26,7 +26,7 @@ class AddMessage extends React.Component<Props, State> {
 
     render() {
         return (
-            <div>
+            <div className="add-message-component">
                 <input
                     type="text"
                     onChange={e => {

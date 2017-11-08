@@ -1,5 +1,17 @@
+$primary1: #B71C1C;
+
+$primary1-text: #FFFFFF;
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+
+.dialog-title {
+  h3 {
+    background-color: $primary1;
+    color: $primary1-text !important;
+  }
 }

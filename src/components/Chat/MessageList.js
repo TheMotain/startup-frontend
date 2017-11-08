@@ -20,7 +20,7 @@ class MessageList extends React.Component<Props, State> {
 
     render() {
         return  (
-            <ul>
+            <ul className="message-list-component">
                 {this.props.chatMessages.map(this.renderChatMessage.bind(this))}
             </ul>
         )
