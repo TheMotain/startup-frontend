@@ -2,7 +2,7 @@
 
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
-
+import {routerReducer} from 'react-router-redux'
 import classReducer from "./ClassReducer"
 
 /**
@@ -11,6 +11,7 @@ import classReducer from "./ClassReducer"
  */
 const reducers = combineReducers({
     form: formReducer,
+    routing: routerReducer,
     classState: classReducer
 
 });
