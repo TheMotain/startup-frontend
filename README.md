@@ -4,7 +4,7 @@ Ce projet est réalisé avec [Create React App](https://github.com/facebookincub
 
 - [Outils utilisés](#outils-utilisés)
 - [Architecture générale du projet](#architecture-générale-du-projet)
-  - [Les composants (components)](#les-composants-(components))
+  - [Les composants (components)](#les-composants-components)
   - [Containers](#containers)
   - [Actions](#actions)
   - [Api](#api)
