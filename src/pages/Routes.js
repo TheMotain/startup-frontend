@@ -10,6 +10,9 @@ type Props = {
 
 type State = {};
 
+/**
+ * Définition des routes et des composant utilisant ces routes.
+ */
 class Routes extends Component<Props, State> {
 
     render() {

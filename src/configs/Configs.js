@@ -9,6 +9,9 @@ if (process.env.NODE_ENV === 'production') {
     ENDPOINT = "http://localhost:8080/";
 }
 
+/**
+ * Objet contenant toutes les configs nécessaires.
+ */
 export default {
     ENDPOINT: ENDPOINT
 }

@@ -12,12 +12,23 @@ type State = {
     openMenu: boolean
 };
 
+/**
+ * Menu (Appbar et menu à gauche)
+ */
 class Menu extends Component<Props, State> {
 
+    /**
+     * Etat du menu.
+     * openMenu : Vrai ou faux si le menu à gauche est ouvert ou non.
+     * @type {{openMenu: boolean}}
+     */
     state = {
         openMenu: false
     };
 
+    /**
+     * Affiche/cache le menu à gauche.
+     */
     handleToggle() {
         let isOpen: boolean = !this.state.openMenu;
 
@@ -27,6 +38,9 @@ class Menu extends Component<Props, State> {
     render() {
         const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
 
+        /**
+         * Permet d'ajouter une marge au contenu de la page pour "pousser" le contenu hors du menu de gauche.
+         */
         if (this.state.openMenu) {
             contentStyle.marginLeft = 256;
         }
@@ -42,7 +56,9 @@ class Menu extends Component<Props, State> {
                     marginTop: 64,
                     height: (window.innerHeight - 64)
                 }}>
-                    <Link to="/classes"><MenuItem>Classe</MenuItem></Link>
+                    <Link to="/classes">
+                        <MenuItem>Classe</MenuItem>
+                    </Link>
                 </Drawer>
 
                 <div style={contentStyle}>

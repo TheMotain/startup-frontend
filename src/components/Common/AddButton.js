@@ -9,6 +9,9 @@ type Props = {};
 
 type State = {}
 
+/**
+ * Permet de créer un "add button" qui s'affiche en haut à droite au dessus du menu.
+ */
 class AddButton extends Component<Props, State> {
 
     render() {

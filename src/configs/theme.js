@@ -3,6 +3,9 @@
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+/**
+ * Permet de modifier le thème de base.
+ */
 const muiTheme = getMuiTheme({
     palette: {
         primary1Color: "#AD0000",
