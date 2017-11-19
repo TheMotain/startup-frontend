@@ -3,6 +3,12 @@ Ce projet est réalisé avec [Create React App](https://github.com/facebookincub
 ## Sommaire
 
 - [Outils utilisés](#outils-utilisés)
+- [Architecture générale du projet](#architecture-générale-du-projet)
+  - [Les composants (components)](#les-composants-(components))
+  - [Containers](#containers)
+  - [Actions](#actions)
+  - [Api](#api)
+  - [Reducers](#reducers)
 
 ## Outils utilisés
 Ce projet utilise les technologies [React](https://reactjs.org/) et [Redux](https://redux.js.org/).
