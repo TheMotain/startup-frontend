@@ -3,8 +3,15 @@ Ce projet est réalisé avec [Create React App](https://github.com/facebookincub
 ## Sommaire
 
 - [Outils utilisés](#outils-utilisés)
+- [Architecture générale du projet](#architecture-générale-du-projet)
+  - [Les composants (components)](#les-composants-components)
+  - [Containers](#containers)
+  - [Actions](#actions)
+  - [Api](#api)
+  - [Reducers](#reducers)
 
-## Outils utilisés
+
+## Outils utilisés
 Ce projet utilise les technologies [React](https://reactjs.org/) et [Redux](https://redux.js.org/).
 
 Pour gérer les routes (pages), react-router@3.0.5 et react-router-redux@4.0.8 sont utilisés.
@@ -237,7 +244,7 @@ export default {
 Ici, l'import "ApiInstance" est une surcouche à notre lib HTTP axios. Cette surcouche s'occupe de définir les
 headers nécessaire (Authorization, Content-Type, baseUrl...).
 
-### Reducers
+### Reducers
 
 Les reducers sont les fonctions ayant pour but de réagir aux actions et de modifier le store.
 
