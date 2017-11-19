@@ -13,7 +13,6 @@ const reducers = combineReducers({
     form: formReducer,
     routing: routerReducer,
     classState: classReducer
-
 });
 
 export default reducers;
