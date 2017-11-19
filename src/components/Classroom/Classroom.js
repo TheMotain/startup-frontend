@@ -19,7 +19,7 @@ class Classroom extends React.Component<Props, State> {
     render() {
         return (
             <ul>
-                {this.renderClasses()}
+                {this.renderClass()}
             </ul>
         )
     }

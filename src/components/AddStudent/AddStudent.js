@@ -1,7 +1,6 @@
 // @flow
 
 import React, {Component} from "react";
-import CreateClassForm from "./CreateClassForm";
 import Dialog from "material-ui/Dialog";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';

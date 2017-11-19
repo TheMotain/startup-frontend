@@ -88,7 +88,7 @@ const getState = (store: Object) => {
     return store.classState;
 };
 
-export const getStudents = (store: Object) => {
+export const getStudentsNotAssigned = (store: Object) => {
     let state = getState(store);
     return state.students.allIds.map(id => state.students.byId[id]);
 };

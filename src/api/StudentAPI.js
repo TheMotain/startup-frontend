@@ -2,6 +2,8 @@
  * Created by louis on 01/11/17.
  */
 import ApiInstance from "./ApiHelper";
+import type {Student} from "../types/Student";
+import Classroom from "../components/Classroom/Classroom";
 
 /**
  * Requête POST sur /... avec ... en body.
@@ -14,18 +16,18 @@ async function addStudent(student: Student, classroom: Classroom) {
     return null
 }
 
-
 /**
  * Requête POST sur /... avec ... en body.
  * @param entry
  * @returns {Promise<any>}
  */
-async function fetchStudent(entry: string) {
+async function getStudents() {
     //TODO return await ApiInstance.post("/class", newClass);
     return null
 }
 
+
 export default {
     addStudent: addStudent,
-    fetchStudents: fetchStudents
+    getStudents: getStudents
 };

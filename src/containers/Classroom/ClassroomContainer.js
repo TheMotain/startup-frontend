@@ -5,7 +5,7 @@ import Classroom from '../../components/Classroom/Classroom'
 import * as StudentSelector from "../../reducers/StudentReducer";
 
 const mapStateToProps = (state) => ({
-    students: StudentSelector.getStudent(state)
+    students: StudentSelector.getStudentsNotAssigned(state)
 });
 
 const mapDispatchToProps = {};

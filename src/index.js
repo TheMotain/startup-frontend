@@ -12,6 +12,9 @@ import CreateClassContainer from "./containers/CreateClass/CreateClassContainer"
 import store from "./Store";
 import "./index.css";
 import "./api/index";
+import AddStudent from "./components/AddStudent/AddStudent";
+import AddStudentContainer from "./containers/AddStudent/AddStudentContainer";
+import ClassroomContainer from "./containers/Classroom/ClassroomContainer";
 
 
 const muiTheme = getMuiTheme({
@@ -33,6 +36,8 @@ ReactDOM.render(
             <div>
                 <ListClassContainer/>
                 <CreateClassContainer/>
+                <ClassroomContainer/>
+                <AddStudentContainer/>
             </div>
         </Provider>
     </MuiThemeProvider>
