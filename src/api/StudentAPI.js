@@ -14,6 +14,18 @@ async function addStudent(student: Student, classroom: Classroom) {
     return null
 }
 
+
+/**
+ * Requête POST sur /... avec ... en body.
+ * @param entry
+ * @returns {Promise<any>}
+ */
+async function fetchStudent(entry: string) {
+    //TODO return await ApiInstance.post("/class", newClass);
+    return null
+}
+
 export default {
-    addStudent: addStudent
+    addStudent: addStudent,
+    fetchStudents: fetchStudents
 };

@@ -7,6 +7,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {Classroom} from "../../types/Classroom";
+import type {Student} from "../../types/Student";
+import AddStudentForm from "./AddStudentForm";
 
 
 type Props = {
