@@ -244,7 +244,7 @@ export default {
 Ici, l'import "ApiInstance" est une surcouche à notre lib HTTP axios. Cette surcouche s'occupe de définir les
 headers nécessaire (Authorization, Content-Type, baseUrl...).
 
-### Reducers
+### Reducers
 
 Les reducers sont les fonctions ayant pour but de réagir aux actions et de modifier le store.
 
