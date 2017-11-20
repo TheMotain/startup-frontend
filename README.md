@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Nesqwik/startup-frontend.svg?branch=master)](https://travis-ci.org/Nesqwik/startup-frontend)
+
 Ce projet est réalisé avec [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Sommaire
