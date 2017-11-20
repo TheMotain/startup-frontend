@@ -17,7 +17,7 @@ addons:
     branches:
       - master
       - develop
-      - feature/*
+      - feature/[a-zA-Z0-9]*
 
 script:
   - npm test -- --coverage --runInBand
