@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0-SNAPSHOT",
   "private": true,
-  "homepage": "https://nesqwik.github.io/startup-frontend/prod",
+  "homepage": "https://nesqwik.github.io/startup-frontend",
   "dependencies": {
     "axios": "^0.17.0",
     "classnames": "^2.2.5",
