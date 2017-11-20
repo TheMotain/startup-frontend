@@ -20,7 +20,7 @@ script:
   - sonar-scanner
   - npm run build
   - mkdir -p to_deploy/prod
-  - cp build/* to_deploy/prod/
+  - cp -R build/* to_deploy/prod/
 
 deploy:
   provider: pages
