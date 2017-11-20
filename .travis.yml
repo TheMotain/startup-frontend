@@ -19,8 +19,8 @@ script:
   - npm test -- --coverage
   - sonar-scanner
   - npm run build
-  - mkdir to_deploy
-  - cp build to_deploy/prod
+  - mkdir -p to_deploy/prod
+  - cp build/* to_deploy/prod/
 
 deploy:
   provider: pages
