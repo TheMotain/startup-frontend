@@ -16,7 +16,7 @@ addons:
       secure: $SONAR_TOKEN # encrypted value of your token
 
 script:
-  - npm test -- --coverage
+  - npm test -- --coverage --runInBand
   - sonar-scanner
   - npm run build
 
