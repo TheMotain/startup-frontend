@@ -2,8 +2,9 @@ language: node_js
 node_js:
   - "7"
 cache:
-  - node_modules
-  - build
+  directories:
+    - node_modules
+    - build
 
 install:
   - npm install
