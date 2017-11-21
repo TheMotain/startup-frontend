@@ -29,11 +29,18 @@ script:
 #    branch: master
 
 
- deploy:
-   provider: firebase
-   token:
-     secure: $FIREBASE_TOKEN
-   project: "ludiclasse"
-   local_dir: build
-   on:
+deploy:
+  provider: firebase
+  token:
+    secure: $FIREBASE_TOKEN
+  project: "ludiclasse"
+  on:
     branch: master
+
+deploy:
+  provider: firebase
+  token:
+    secure: $FIREBASE_TOKEN
+  project: "ludiclasse-dev"
+  on:
+    branch: develop
