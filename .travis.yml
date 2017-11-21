@@ -24,10 +24,19 @@ script:
   - sonar-scanner
   - npm run build
 
+
 deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  local_dir: build
-  on:
-    branch: master
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure: $FIREBASE_TOKEN
+    project: "ludiclasse"
+    on:
+      branch: master
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure: $FIREBASE_TOKEN
+    project: "ludiclasse-dev"
+    on:
+      branch: develop
