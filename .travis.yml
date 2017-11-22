@@ -20,7 +20,6 @@ addons:
       - feature/[a-zA-Z0-9]*
 
 script:
-  - if [ $TRAVIS_BRANCH != 'master' ]; export NODE_ENV="development"; fi
   - npm test -- --coverage --runInBand
   - sonar-scanner
   - npm run build
