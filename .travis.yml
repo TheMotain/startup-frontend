@@ -22,7 +22,8 @@ addons:
 script:
   - npm test -- --coverage --runInBand
   - sonar-scanner
-  - npm run build
+  - if [ "$TRAVIS_BRANCH" = "develop" ]; then NODE_ENV="development" && npm run build; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build; fi
 
 
 deploy:
