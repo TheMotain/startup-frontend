@@ -9,13 +9,13 @@ import type {Classroom} from "../../types/Classroom";
 import type {Student} from "../../types/Student";
 import AddStudentForm from "./AddStudentForm";
 import * as StringUtils from "../../utils/StringUtils"
+import AddButton from "../Common/AddButton";
 
 
 type Props = {
     postStatus: ReducerUtils.PostStatus,
     onAddStudent: (number, number) => Promise<Student>,
     students: Array<Student>,
-    getStudents: (void) => Promise<any>,
     classroom : Classroom
 
 };
@@ -49,10 +49,6 @@ class AddStudent extends Component<Props, State> {
         searchValue: ""
     };
 
-    constructor(props: Props){
-        super(props);
-        this.props.getStudents();
-    }
 
     /**
      * Ouvre la modal
@@ -112,9 +108,9 @@ class AddStudent extends Component<Props, State> {
 
         return (
             <div>
-                <FloatingActionButton onClick={this.handleOpen.bind(this)} secondary={true}>
+                <AddButton onClick={this.handleOpen.bind(this)}>
                     <ContentAdd />
-                </FloatingActionButton>
+                </AddButton>
                 <Dialog
                     title="Ajouter un élève"
                     modal={true}

@@ -109,7 +109,7 @@ function getStudentsFulfilled(state: State, action: ReducerUtils.Action){
 
     return update(state, {
         fetchStatus: {
-            $set: ReducerUtils.updateFetching(state.fetchStatus)
+            $set: ReducerUtils.updateFetched(state.fetchStatus)
         },
         students: {
             byId: {
@@ -126,7 +126,7 @@ function getStudentsRejected(state: State, action: ReducerUtils.Action){
 
     return update(state, {
         fetchStatus: {
-            $set: ReducerUtils.updateFetching(state.fetchStatus)
+            $set: ReducerUtils.updateFetchError(state.fetchStatus)
         }
     });
 }
@@ -155,4 +155,10 @@ export const getStudentsForClass = (store: Object, classId: number) => {
 export const getPostStatus = (store: Object) => {
     let state = getState(store);
     return state.postStatus;
+};
+
+export const getFetchStatus = (store: Object) => {
+    let state = getState(store);
+    return state.fetchStatus;
+
 };
