@@ -1,12 +1,10 @@
 // @flow
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from 'material-ui/CircularProgress';
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {renderTextField, required, minLength2, alphaNum} from "../../utils/ReduxFormUtils";
-import DoneIcon from 'material-ui/svg-icons/action/done';
-import BlockIcon from 'material-ui/svg-icons/content/block';
-import ValidButton from "../ValidButton/ValidButton";
+
+import ValidateButton from "../ValidateButton/ValidateButton";
 
 /**
  * Formulaire de création de classe.
@@ -31,11 +29,14 @@ let CreateClassForm = props => {
                 validate={[required, minLength2, alphaNum]}
             />
             <div>
-                <ValidButton
-                    isLoading={isLoading}
+
+
+                <ValidateButton
                     isValid={valid}
-                    label="Créer"
+                    isLoading={isLoading}
+                    label={"Créer"}
                 />
+
                 <RaisedButton
                     label="Annuler"
                     onClick={onCancel}
