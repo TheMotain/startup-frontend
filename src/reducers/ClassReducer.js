@@ -118,7 +118,7 @@ const fetchClassesFulfilled = (state: State, action: ReducerUtils.Action) => {
                 $set: ReducerUtils.arrayToMap(classrooms)
             },
             allIds: {
-                $push: classrooms.map((classroom: Classroom) => classroom.id)
+                $set: classrooms.map((classroom: Classroom) => classroom.id)
             }
         }
     });

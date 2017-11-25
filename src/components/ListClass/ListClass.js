@@ -1,19 +1,21 @@
 // @flow
-import React from 'react'
+import React from "react";
 import type {Classroom} from "../../types/Classroom";
-import {List} from 'material-ui/List';
+
+import {List} from "material-ui/List";
+
 import ClassItem from "./ClassItem";
+import * as ReducerUtils from "../../reducers/ReducerUtils";
 
 type Props = {
     classes: Array<Classroom>,
-    fetchClasses: () => Promise<any>
+    fetchClasses: () => Promise<any>,
+    fetchStatus: ReducerUtils.FetchStatus
 }
 
 type State = {}
 
 class ListClass extends React.Component<Props, State> {
-
-    state = {};
 
     constructor(props: Props) {
         super(props);
