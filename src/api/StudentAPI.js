@@ -3,7 +3,7 @@
  */
 import ApiInstance from "./ApiHelper";
 import type {Student} from "../types/Student";
-import Classroom from "../components/Classroom/Classroom";
+import Classroom from "../components/Classroom/ClassroomDisplay";
 
 /**
  * Requête POST sur /... avec ... en body.
@@ -11,9 +11,11 @@ import Classroom from "../components/Classroom/Classroom";
  * @param classroom
  * @returns {Promise<any>}
  */
-async function addStudent(student: Student, classroom: Classroom) {
-    //TODO return await ApiInstance.post("/class", newClass);
-    return null
+async function addStudent(studentId: number, classroomId: number) {
+    return await ApiInstance.post("/addClassToStudent", {
+        "idClass": classroomId,
+        "idStudent": studentId
+    });
 }
 
 /**
@@ -22,8 +24,7 @@ async function addStudent(student: Student, classroom: Classroom) {
  * @returns {Promise<any>}
  */
 async function getStudents() {
-    //TODO return await ApiInstance.post("/class", newClass);
-    return null
+    return await ApiInstance.get("/student");
 }
 
 

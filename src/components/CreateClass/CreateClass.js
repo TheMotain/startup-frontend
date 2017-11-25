@@ -85,7 +85,9 @@ class CreateClass extends Component<Props, State> {
                     open={this.state.open}
                     className="dialog-title"
                 >
-                    <CreateClassForm onSubmit={this.onSubmit.bind(this)} onCancel={this.handleClose.bind(this)}/>
+                    <CreateClassForm
+                        onSubmit={this.onSubmit.bind(this)}
+                        onCancel={this.handleClose.bind(this)}/>
                     {this.state.serverErrors.map(error => <p>{error}</p>)}
                 </Dialog>
             </div>

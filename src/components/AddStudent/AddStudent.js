@@ -8,16 +8,22 @@ import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {Classroom} from "../../types/Classroom";
 import type {Student} from "../../types/Student";
 import AddStudentForm from "./AddStudentForm";
+import * as StringUtils from "../../utils/StringUtils"
 
 
 type Props = {
     postStatus: ReducerUtils.PostStatus,
-    onAddStudent: (Student, Classroom) => Promise<Student>
+    onAddStudent: (number, number) => Promise<Student>,
+    students: Array<Student>,
+    getStudents: (void) => Promise<any>,
+    classroom : Classroom
+
 };
 
 type State = {
     open: boolean,
-    serverErrors: Array<string>
+    serverErrors: Array<string>,
+    searchValue: string
 }
 
 /**
@@ -34,12 +40,19 @@ class AddStudent extends Component<Props, State> {
      * Attributs du composant.
      * open : boolean vrai si la modal est ouverte, faux sinon.
      * serverErrors: tableau d'erreur à afficher sur le formulaire. (sera modifié ensuite par une notification)
+     * searchValue: chaine de charactères contenant la valeur du champs de recherche
      * @type {{open: boolean, serverErrors: Array}}
      */
     state = {
         open: false,
-        serverErrors: []
+        serverErrors: [],
+        searchValue: ""
     };
+
+    constructor(props: Props){
+        super(props);
+        this.props.getStudents();
+    }
 
     /**
      * Ouvre la modal
@@ -55,30 +68,48 @@ class AddStudent extends Component<Props, State> {
         this.setState({open: false});
     };
 
-
     /**
      * fonction appelé lors de l'envoi du formulaire.
      * @param form Le formulaire (valide)
      */
-    onSubmit(form: Object) {
-        let student: Student = {
-            studentName: form.studentName
-        };
+    handleNewRequest(chosenRequest: Student, index: number) {
 
-        let classroom: Classroom = {
-            className: form.className
-        };
+        if(index != -1) {
+            let student: Student = chosenRequest;
 
-        this.props.onAddStudent(student ,classroom).then(() => {
-            this.handleClose();
-        }, (errors) => {
-            this.setState({
-                serverErrors: errors
+            let classroom: Classroom = this.props.classroom;
+
+            if(!student.id || !classroom.id)
+                return;
+            this.props.onAddStudent(student.id, classroom.id).then(() => {
+                this.handleClose();
+            }, (errors) => {
+                this.setState({
+                    serverErrors: errors
+                });
             });
+        }else{
+            //TODO afficher une erreur
+        }
+
+    };
+
+    handleUpdateInput = (value: string) => {
+
+        this.setState({
+            searchValue: value
         });
+    };
+
+
+    getDataSource(){
+        console.log(this.props.students, this.state.searchValue)
+        return this.props.students.filter((student) => StringUtils.specialContains(student.firstName + " " + student.lastName, this.state.searchValue))
     }
 
+
     render() {
+
         return (
             <div>
                 <FloatingActionButton onClick={this.handleOpen.bind(this)} secondary={true}>
@@ -90,7 +121,12 @@ class AddStudent extends Component<Props, State> {
                     open={this.state.open}
                     className="dialog-title"
                 >
-                    <AddStudentForm onSubmit={this.onSubmit.bind(this)} onCancel={this.handleClose.bind(this)}/>
+                    <AddStudentForm onNewRequest={this.handleNewRequest.bind(this)}
+                                    onCancel={this.handleClose.bind(this)}
+                                    students={this.getDataSource()}
+                                    onUpdateInput={this.handleUpdateInput.bind(this)}
+                    />
+
                     {this.state.serverErrors.map(error => <p>{error}</p>)}
                 </Dialog>
             </div>

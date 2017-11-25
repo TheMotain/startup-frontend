@@ -7,6 +7,7 @@
  */
 export type Student = {
     id?: number,
-    studentName: string,
-    idClass: number
+    firstName: string,
+    lastName: string,
+    idClass?: number
 };
