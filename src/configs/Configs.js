@@ -6,7 +6,7 @@ let ENDPOINT;
 if (process.env.NODE_ENV === 'production') {
     ENDPOINT = "http://149.202.179.212:8080/prod/";
 } else {
-    ENDPOINT = "http://192.168.2.12:8080/";
+    ENDPOINT = "http://149.202.179.212:8080/dev/";
 }
 
 /**
