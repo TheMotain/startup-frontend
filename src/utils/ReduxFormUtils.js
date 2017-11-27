@@ -5,6 +5,7 @@
 import React from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
+import Checkbox from 'material-ui/Checkbox'
 
 /************************/
 /*    INPUT RENDERERS   */
@@ -31,6 +32,15 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
         errorText={touched && error}
         {...input}
         {...custom}
+    />
+);
+
+
+export const renderCheckbox = ({ input, label }: Object) => (
+    <Checkbox
+        label={label}
+        checked={!!input.value}
+        onCheck={input.onChange}
     />
 );
 

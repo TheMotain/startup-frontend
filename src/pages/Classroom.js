@@ -2,6 +2,7 @@
 
 import React, {Component} from "react";
 import BackCover from "../components/BackCover/BackCover";
+import CreateQCMContainer from "../containers/CreateQCM/CreateQCMContainer";
 
 type Props = {
     params: Object
@@ -16,6 +17,7 @@ class Classroom extends Component<Props, State> {
             <div>
                 <BackCover />
                 Afficher les informations de la classe {this.props.params.id}
+                <CreateQCMContainer classId={this.props.params.id}/>
             </div>
         );
     }
