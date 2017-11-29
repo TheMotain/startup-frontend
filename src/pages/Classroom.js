@@ -10,6 +10,11 @@ type Props = {
 type State = {
 }
 
+/**
+ * Page de gestion d'une classe
+ * Accessible via /classes/idClass
+
+ */
 class Classroom extends Component<Props, State> {
     render() {
         return (

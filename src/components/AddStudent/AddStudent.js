@@ -2,20 +2,17 @@
 
 import React, {Component} from "react";
 import Dialog from "material-ui/Dialog";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {Classroom} from "../../types/Classroom";
 import type {Student} from "../../types/Student";
 import AddStudentForm from "./AddStudentForm";
-import * as StringUtils from "../../utils/StringUtils"
 import AddButton from "../Common/AddButton";
+import moment from "moment";
 
 
 type Props = {
     postStatus: ReducerUtils.PostStatus,
-    onAddStudent: (number, number) => Promise<Student>,
-    students: Array<Student>,
+    onAddStudent: (Student) => Promise<Student>,
     classroom : Classroom
 
 };
@@ -23,16 +20,19 @@ type Props = {
 type State = {
     open: boolean,
     serverErrors: Array<string>,
-    searchValue: string
+    searchValue: string,
+    dateBirthday: string,
+    validDate: boolean
 }
 
 /**
- * Composant permettant de créer une classe.
+ * Composant permettant de créer et d'ajouter un élève à une classe.
  * Constitué d'un bouton + qui ouvre une modal contenant le formulaire.
  *
  * propriétés :
- *  postStatus: état de la requête d'ajout de classe.
- *  onPostClass: fonction callback à appeler pour ajouter une classe.
+ *  postStatus: état de la requête d'ajout d'élève.
+ *  onAddStudent: fonction callback à appeler pour ajouter un élève.
+ *  classroom: classe pour laquelle l'élève est ajouté
  */
 class AddStudent extends Component<Props, State> {
 
@@ -40,13 +40,13 @@ class AddStudent extends Component<Props, State> {
      * Attributs du composant.
      * open : boolean vrai si la modal est ouverte, faux sinon.
      * serverErrors: tableau d'erreur à afficher sur le formulaire. (sera modifié ensuite par une notification)
-     * searchValue: chaine de charactères contenant la valeur du champs de recherche
-     * @type {{open: boolean, serverErrors: Array}}
+     * searchValue: chaine de caractères contenant la valeur du champs de recherche
+     * @type {{open: boolean, serverErrors: Array, searchValue: string, dateBirthday: string, validDate: boolean}}
      */
     state = {
         open: false,
         serverErrors: [],
-        searchValue: ""
+        searchValue: "",
     };
 
 
@@ -65,42 +65,35 @@ class AddStudent extends Component<Props, State> {
     };
 
     /**
-     * fonction appelé lors de l'envoi du formulaire.
+     * fonction appelée lors de l'envoi du formulaire.
      * @param form Le formulaire (valide)
      */
-    handleNewRequest(chosenRequest: Student, index: number) {
+    handleSubmit(form: Object) {
+        let student: Student = {
+            firstName: form.studentFirstName,
+            lastName: form.studentLastName,
+            born: moment(form.born).toISOString(),
+            idClass: this.props.classroom.id
 
-        if(index != -1) {
-            let student: Student = chosenRequest;
+        };
 
-            let classroom: Classroom = this.props.classroom;
-
-            if(!student.id || !classroom.id)
-                return;
-            this.props.onAddStudent(student.id, classroom.id).then(() => {
-                this.handleClose();
-            }, (errors) => {
-                this.setState({
-                    serverErrors: errors
-                });
+        this.props.onAddStudent(student).then(() => {
+            this.handleClose();
+        }, (errors) => {
+            this.setState({
+                serverErrors: errors
             });
-        }else{
-            //TODO afficher une erreur
-        }
-
-    };
-
-    handleUpdateInput = (value: string) => {
-
-        this.setState({
-            searchValue: value
         });
-    };
+    }
 
+    /**
+     * fonction appelée pour formatter la date, une fois qu'un date a été selectionnée
+     * @param date la date rentrée dans le date picker
+     * @returns {string} renvoie la date a afficher dans le champs
+     */
+    handleFormatDate(date: object){
 
-    getDataSource(){
-        console.log(this.props.students, this.state.searchValue)
-        return this.props.students.filter((student) => StringUtils.specialContains(student.firstName + " " + student.lastName, this.state.searchValue))
+        return moment(date).format("Do MMMM YYYY");
     }
 
 
@@ -108,19 +101,18 @@ class AddStudent extends Component<Props, State> {
 
         return (
             <div>
-                <AddButton onClick={this.handleOpen.bind(this)}>
-                    <ContentAdd />
-                </AddButton>
+                <AddButton onClick={this.handleOpen.bind(this)}/>
                 <Dialog
                     title="Ajouter un élève"
                     modal={true}
                     open={this.state.open}
                     className="dialog-title"
                 >
-                    <AddStudentForm onNewRequest={this.handleNewRequest.bind(this)}
-                                    onCancel={this.handleClose.bind(this)}
-                                    students={this.getDataSource()}
-                                    onUpdateInput={this.handleUpdateInput.bind(this)}
+                    <AddStudentForm
+                        onSubmit={this.handleSubmit.bind(this)}
+                        onCancel={this.handleClose.bind(this)}
+                        isLoading={this.props.postStatus.posting}
+                        formatDate={this.handleFormatDate.bind(this)}
                     />
 
                     {this.state.serverErrors.map(error => <p>{error}</p>)}

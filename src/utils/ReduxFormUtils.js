@@ -5,6 +5,7 @@
 import React from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
+import {DatePicker} from "material-ui";
 
 /************************/
 /*    INPUT RENDERERS   */
@@ -32,7 +33,19 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
         {...input}
         {...custom}
     />
+
+
+);export const renderDatePicker = ({input, label, meta: {touched, error}, custom}: Object) => (
+    <DatePicker
+        hintText={label}
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        {...custom}
+    />
 );
+
+
 
 /*********************/
 /* FIELD VERIFICATOR */

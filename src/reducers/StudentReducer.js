@@ -19,6 +19,8 @@ type State = {
     },
     fetchStatus: ReducerUtils.FetchStatus,
     postStatus: ReducerUtils.PostStatus,
+    updateStatus: ReducerUtils.UpdateStatus
+
 }
 
 const initialState: State = {
@@ -27,11 +29,12 @@ const initialState: State = {
         allIds: []
     },
     fetchStatus: ReducerUtils.createFetchStatus(),
-    postStatus: ReducerUtils.createPostStatus()
+    postStatus: ReducerUtils.createPostStatus(),
+    updateStatus: ReducerUtils.createUpdateStatus()
 };
 
 /**
- * Reducer pour la classe.
+ * Reducer pour l'élève.
  * @param state
  * @param action
  * @returns {*}
@@ -44,6 +47,13 @@ const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
         case StudentActions.GET_STUDENTS_PENDING: return getStudentsPending(state);
         case StudentActions.GET_STUDENTS_FULFILLED: return getStudentsFulfilled(state, action);
         case StudentActions.GET_STUDENTS_REJECTED: return getStudentsRejected(state, action);
+        case StudentActions.ADD_BONUS_PENDING: return addBonusPending(state);
+        case StudentActions.ADD_BONUS_FULFILLED: return addBonusFulfilled(state, action);
+        case StudentActions.ADD_BONUS_REJECTED: return addBonusRejected(state, action);
+        case StudentActions.ADD_MALUS_PENDING: return addMalusPending(state);
+        case StudentActions.ADD_MALUS_FULFILLED: return addMalusFulfilled(state, action);
+        case StudentActions.ADD_MALUS_REJECTED: return addMalusRejected(state, action);
+
         default: return state
     }
 };
@@ -126,11 +136,90 @@ function getStudentsRejected(state: State, action: ReducerUtils.Action){
 
     return update(state, {
         fetchStatus: {
-            $set: ReducerUtils.updateFetchError(state.fetchStatus)
+            $set: ReducerUtils.updateFetchError(state.fetchStatus, action.payload)
         }
     });
 }
 
+function addBonusPending(state: State){
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdating(state.updateStatus)
+        }
+    });
+
+}
+
+function addBonusFulfilled(state: State, action: ReducerUtils.Action){
+
+    let student: Student = action.payload;
+
+    if (student.id === undefined) return state;
+    let studentId: number = student.id;
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdated(state.updateStatus),
+        },
+        classes: {
+            byId: {
+                [studentId]: {
+                    $set: student
+                }
+            }
+        }
+    });
+}
+
+function addBonusRejected(state: State, action: ReducerUtils.Action){
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdateError(state.updateStatus, action.payload)
+        }
+    });
+}
+
+function addMalusPending(state: State){
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdating(state.updateStatus)
+        }
+    });
+
+}
+
+function addMalusFulfilled(state: State, action: ReducerUtils.Action){
+
+    let student: Student = action.payload;
+
+    if (student.id === undefined) return state;
+    let studentId: number = student.id;
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdated(state.updateStatus),
+        },
+        classes: {
+            byId: {
+                [studentId]: {
+                    $set: student
+                }
+            }
+        }
+    });
+}
+
+function addMalusRejected(state: State, action: ReducerUtils.Action){
+
+    return update(state, {
+        updateStatus: {
+            $set: ReducerUtils.updateUpdateError(state.updateStatus, action.payload)
+        }
+    });
+}
 
 /*************/
 /* SELECTORS */
@@ -140,16 +229,10 @@ const getState = (store: Object) => {
     return store.studentState;
 };
 
-export const getStudentsNotAssigned = (store: Object) => {
-    let state = getState(store);
-    console.log(state)
-    return state.students.allIds.map(id => state.students.byId[id]).filter((student) => student.idClass == null);
-};
-
 export const getStudentsForClass = (store: Object, classId: number) => {
     let state = getState(store);
     console.log(state)
-    return state.students.allIds.map(id => state.students.byId[id]).filter((student) => student.idClass == classId);
+    return state.students.allIds.map(id => state.students.byId[id]).filter((student) => student.idClass === classId);
 };
 
 export const getPostStatus = (store: Object) => {

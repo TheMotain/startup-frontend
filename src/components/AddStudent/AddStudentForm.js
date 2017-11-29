@@ -1,11 +1,9 @@
 // @flow
 import React from "react";
-import {reduxForm} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import RaisedButton from "material-ui/RaisedButton";
-import {renderTextField, required, minLength2, alphaNum} from "../../utils/ReduxFormUtils";
-import {AutoComplete} from "material-ui";
-import type {Student} from "../../types/Student";
-import {getStudents} from "../../actions/StudentActions";
+import {renderTextField, renderDatePicker, required, minLength2, alphaNum} from "../../utils/ReduxFormUtils";
+import ValidateButton from "../ValidateButton/ValidateButton";
 
 /**
  * Formulaire d'ajout d'élève.
@@ -22,34 +20,50 @@ let AddStudentForm = props => {
      * invalid => boolean à faux si le formulaire est invalide. Vrai sinon.
      * onCancel => fonction donné lors de l'instanciation du composant. Appelé lors d'un clique sur le bouton annuler.
      */
-    const {onNewRequest, onCancel, students, onUpdateInput} = props;
-
-    const dataSource = students.map((stud) => ({
-        name: `${stud.firstName}  ${stud.lastName}`,
-        student: stud
-    }));
-
-    const dataSourceConfig = {
-        text: 'name', value: 'student'
-    }
+    const {valid, onCancel, handleSubmit, isLoading, formatDate} = props;
 
     return (
-        <div>
-            <AutoComplete
-                name="studentName"
-                hintText={"Rechercher un élève"}
-                dataSource={dataSource}
-                dataSourceConfig={dataSourceConfig}
-                onUpdateInput={onUpdateInput}
-                onNewRequest={onNewRequest}
+        <form onSubmit={handleSubmit} className="add-student-form">
+
+            <Field
+                name="studentFirstName"
+                component={renderTextField}
+                label="Prénom"
+                validate={[required, minLength2, alphaNum]}
             />
+
+            <Field
+                name="studentLastName"
+                component={renderTextField}
+                label="Nom"
+                validate={[required, minLength2, alphaNum]}
+            />
+
+
+            <Field
+                name={"born"}
+                component={renderDatePicker}
+                label={"Date de naissance"}
+                openToYearSelection={true}
+                formatDate={formatDate}
+                validate={[required]}
+            />
+
+
             <div>
+                <ValidateButton
+                    isValid={valid}
+                    isLoading={isLoading}
+                    label={"Créer"}
+                />
+
                 <RaisedButton
                     label="Annuler"
                     onClick={onCancel}
+                    className="cancel-button"
                 />
             </div>
-        </div>
+        </form>
     );
 };
 
