@@ -132,7 +132,6 @@ export const alpha = (value: any) => {
  * @returns undefined if there is no error, the error string else.
  */
 export const required = (value: any) => {
-    console.log(value);
     return FormUtils.isEmpty(value) ? "Ce champ est obligatoire." : undefined;
 };
 

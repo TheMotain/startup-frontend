@@ -80,7 +80,6 @@ class AddStudent extends Component<Props, State> {
         this.props.onAddStudent(student).then(() => {
             this.handleClose();
         }, (errors) => {
-            console.log(errors);
             this.setState({
                 serverErrors: errors
             });
