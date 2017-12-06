@@ -2,11 +2,8 @@
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import {Field, FieldArray, reduxForm} from "redux-form";
-import {renderTextField, required, renderCheckbox, alphaNum} from "../../utils/ReduxFormUtils";
-import {List, ListItem} from 'material-ui/List';
-
+import {renderCustomCheckbox, renderTextField, required} from "../../utils/ReduxFormUtils";
 import ValidateButton from "../ValidateButton/ValidateButton";
-import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
 import BlockIcon from 'material-ui/svg-icons/content/block';
 
@@ -27,23 +24,27 @@ let CreateQCMForm = props => {
 
 
     const renderAnswers = ({fields}) => {
+
+        // At leas 1 input
+        if (fields.length === 0) {
+            fields.push({good: false});
+        }
+
         return (
-            <List>
-                <ListItem type="button" onClick={() => fields.push({good: false})}>
-                    Ajouter une réponse +
-                </ListItem>
-                <Subheader>Réponses :</Subheader>
+            <div style={{
+                overflow: "auto",
+                maxHeight: "300px"
+            }}>
+
+                <RaisedButton onClick={() => fields.push({good: false})}>
+                    Ajouter une réponse
+                </RaisedButton>
+                <h2>Réponses :</h2>
 
                 {fields.map((choices, index) => (
-                    <ListItem
-                        disabled={true}
-                        key={index}
-                        rightIconButton={
-                            <IconButton onClick={() => fields.remove(index)}>
-                                <BlockIcon />
-                            </IconButton>
-                        }
-                    >
+                    <div key={index} style={{
+                        width: "100%"
+                    }}>
                         <Field
                             name={`${choices}.choice`}
                             type="text"
@@ -51,14 +52,17 @@ let CreateQCMForm = props => {
                             component={renderTextField}
                             label={`Réponse #${index + 1}`}
                         />
-
                         <Field
                             name={`${choices}.good`}
-                            component={renderCheckbox}
+                            component={renderCustomCheckbox}
                         />
-                    </ListItem>
+                        <IconButton onClick={() => fields.remove(index)}>
+                            <BlockIcon/>
+                        </IconButton>
+
+                    </div>
                 ))}
-            </List>
+            </div>
         );
     };
 

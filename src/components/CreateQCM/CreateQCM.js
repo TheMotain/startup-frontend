@@ -73,7 +73,7 @@ class CreateQCM extends Component<Props, State> {
             <div>
                 <AddButton onClick={this.handleOpen.bind(this)}/>
                 <Dialog
-                    title="Créer une classe"
+                    title="Envoyer une question"
                     modal={true}
                     open={this.state.open}
                     className="dialog-title"
