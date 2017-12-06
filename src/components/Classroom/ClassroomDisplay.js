@@ -22,8 +22,8 @@ type Props = {
     fetchStudents: ()=>Promise<any>,
     postStatus: ReducerUtils.PostStatus,
     onAddStudent: (Student) => Promise<Student>,
-    onAddBonus: (Student) => Promise<any>,
-    onAddMalus: (Student) => Promise<any>,
+    onAddBonus: (number) => Promise<any>,
+    onAddMalus: (number) => Promise<any>,
 
 }
 
@@ -69,9 +69,9 @@ class ClassroomDisplay extends React.Component<Props, State> {
      * Fonction appelée pour ajouter un point Bonus
      * @param student est l'élève qui a un point bonus ajouté.
      */
-    handleAddBonus(student: Student){
+    handleAddBonus(studentId: number){
 
-        this.props.onAddBonus(student).then(() => {},(errors) => {
+        this.props.onAddBonus(studentId).then(() => {},(errors) => {
             this.setState({
                 serverErrors: errors
             });
@@ -82,9 +82,9 @@ class ClassroomDisplay extends React.Component<Props, State> {
      * Fonction appelée pour ajouter un point Malus
      * @param student est l'élève qui a un point malus ajouté.
      */
-    handleAddMalus(student: Student){
+    handleAddMalus(studentId: number){
 
-        this.props.onAddMalus(student).then(() => {},(errors) => {
+        this.props.onAddMalus(studentId).then(() => {},(errors) => {
             this.setState({
                 serverErrors: errors
             });
@@ -96,29 +96,29 @@ class ClassroomDisplay extends React.Component<Props, State> {
      * @returns {Array}
      */
     renderClass() {
-        return this.props.students.filter((student)=> student.idClass === this.props.classroom.id).map((student: Student) =>
+        return this.props.students.filter((student)=> student.classroom.id === this.props.classroom.id).map((student: Student) =>
             <TableRow selectable={false} key={student.id}>
                 <TableRowColumn>{student.firstName}</TableRowColumn>
                 <TableRowColumn>{student.lastName}</TableRowColumn>
                 <TableRowColumn>
                     <FlatButton
                         style={{color:'#008000'}}
-                        label={student.bonus}
+                        label={student.points.bonus}
                         labelPosition="before"
                         icon={<Plus/>}
-                        onClick={this.handleAddBonus.bind(this, student)}
+                        onClick={this.handleAddBonus.bind(this, student.id)}
                     />
                 </TableRowColumn>
                 <TableRowColumn>
                     <FlatButton
                         style={{color:'#FF0000'}}
-                        label={student.malus}
+                        label={student.points.malus}
                         labelPosition="before"
                         icon={<Minus/>}
-                        onClick={this.handleAddMalus.bind(this, student)}
+                        onClick={this.handleAddMalus.bind(this, student.id)}
                     />
                 </TableRowColumn>
-                <TableRowColumn>{student.bonus - student.malus}</TableRowColumn>
+                <TableRowColumn>{student.points.bonus - student.points.malus}</TableRowColumn>
                 {this.state.serverErrors.map(error => <p>{error}</p>)}
             </TableRow>
 

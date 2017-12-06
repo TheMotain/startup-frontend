@@ -16,7 +16,11 @@ export type Student = {
     firstName: string,
     lastName: string,
     born: string,
-    idClass: number,
-    bonus: number,
-    malus: number
-};
+    classroom: {
+        id: number
+    },
+    points: {
+        bonus: number,
+        malus: number,
+        student: {}
+    }};

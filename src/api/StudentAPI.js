@@ -8,6 +8,7 @@ import type {Student} from "../types/Student";
  * Requête POST sur /student avec student en body.
  * @param student
  * @returns {Promise<any>}
+ *
  */
 async function addStudent(student: Student) {
     return await ApiInstance.post("/student", student);
@@ -15,7 +16,6 @@ async function addStudent(student: Student) {
 
 /**
  * Requête GET sur /student.
- * @param entry
  * @returns {Promise<any>}
  */
 async function getStudents() {
@@ -23,21 +23,39 @@ async function getStudents() {
 }
 
 /**
- * Requête PUT sur /bonus avec student en body.
- * @param entry
+ * Requête GET sur /points.
+ * @param studentId
  * @returns {Promise<any>}
  */
-async function addBonus(student: Student) {
-    return await ApiInstance.put("/bonus", student);
+async function getPoints(studentId: number) {
+    return await ApiInstance.get("/points");
+}
+
+
+/**
+ * Requête PUT sur /bonus avec student en body.
+ * @param studentId
+ * @returns {Promise<any>}
+ */
+async function addBonus(studentId: number) {
+    return await ApiInstance.put("/points", {
+        "bonus": 1,
+        "idStudent": studentId,
+        "malus": 0
+    });
 }
 
 /**
  * Requête PUT sur /malus avec student en body.
- * @param entry
+ * @param studentId
  * @returns {Promise<any>}
  */
-async function addMalus(student: Student) {
-    return await ApiInstance.put("/malus", student);
+async function addMalus(studentId: number) {
+    return await ApiInstance.put("/points", {
+        "bonus": 0,
+        "idStudent": studentId,
+        "malus": 1
+    });
 }
 
 
@@ -45,5 +63,6 @@ export default {
     addStudent: addStudent,
     getStudents: getStudents,
     addBonus: addBonus,
-    addMalus: addMalus
+    addMalus: addMalus,
+    getPoints: getPoints
 };

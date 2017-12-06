@@ -47,6 +47,7 @@ export function isEmpty(input: any): boolean {
     if (typeof input === "number") return false;
     if (typeof input === "object") {
         if (!input) return true;
+        console.log(input);
         return Object.keys(input).length === 0;
     }
     return !input;

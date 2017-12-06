@@ -42,10 +42,8 @@ let AddStudentForm = props => {
 
             <Field
                 name={"born"}
-                component={renderDatePicker}
                 label={"Date de naissance"}
-                openToYearSelection={true}
-                formatDate={formatDate}
+                component={renderDatePicker}
                 validate={[required]}
             />
 

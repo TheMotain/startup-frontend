@@ -86,16 +86,6 @@ class AddStudent extends Component<Props, State> {
         });
     }
 
-    /**
-     * fonction appelée pour formatter la date, une fois qu'un date a été selectionnée
-     * @param date la date rentrée dans le date picker
-     * @returns {string} renvoie la date a afficher dans le champs
-     */
-    handleFormatDate(date: object){
-
-        return moment(date).format("Do MMMM YYYY");
-    }
-
 
     render() {
 
@@ -112,7 +102,6 @@ class AddStudent extends Component<Props, State> {
                         onSubmit={this.handleSubmit.bind(this)}
                         onCancel={this.handleClose.bind(this)}
                         isLoading={this.props.postStatus.posting}
-                        formatDate={this.handleFormatDate.bind(this)}
                     />
 
                     {this.state.serverErrors.map(error => <p>{error}</p>)}

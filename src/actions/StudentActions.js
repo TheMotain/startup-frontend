@@ -23,6 +23,12 @@ export const ADD_MALUS_PENDING = ADD_MALUS + "_PENDING";
 export const ADD_MALUS_FULFILLED = ADD_MALUS + "_FULFILLED";
 export const ADD_MALUS_REJECTED = ADD_MALUS + "_REJECTED";
 
+export const GET_POINTS = "GET_POINTS";
+export const GET_POINTS_PENDING = GET_POINTS + "_PENDING";
+export const GET_POINTS_FULFILLED = GET_POINTS + "_FULFILLED";
+export const GET_POINTS_REJECTED = GET_POINTS + "_REJECTED";
+
+
 /**
  * Action permettant d'ajouter un élève.
  * Appel la requête de l'ajout d'un élève.
@@ -57,33 +63,51 @@ export function getStudents() {
 }
 
 /**
+ * Action permettant de récupérer la liste des points d'un élève.
+ * Appel la requête de la récupération des points de l'élèves
+ * @param studentId l'élève
+
+ * type : génère les types GET_POINTS_[PENDING/REJECTED/FULFILLED] automatiquement à récupérer dans le reducer.
+ * payload : Promise contenant erreur si rejected ou la liste des élèves si réussi.
+ * @returns {{type: string, payload: Promise}}
+ */
+export function getPoints(studentId: number) {
+
+    return {
+        type: GET_POINTS,
+        payload:StudentAPI.getPoints(studentId)
+    }
+}
+
+
+/**
  * Action permettant l'ajout d'un bonus à un élève.
  * Appel la requête de l'ajout d'un bonus à un élève.
- * @param student l'élève
+ * @param studentId id de l'élève
  *
  * type : génère les types ADD_BONUS_[PENDING/REJECTED/FULFILLED] automatiquement à récupérer dans le reducer.
  * payload : Promise contenant erreur si rejected ou le bonus ajouté à l'élève si réussi.
  * @returns {{type: string, payload: Promise}}
  */
-export function addBonus(student: Student) {
+export function addBonus(studentId: number) {
     return {
         type: ADD_BONUS,
-        payload: StudentAPI.addBonus(student)
+        payload: StudentAPI.addBonus(studentId)
     }
 }
 
 /**
  * Action permettant d'ajouter un malus à un élève.
  * Appel la requête de l'ajout d'un malus à un élève.
- * @param student l'élève
+ * @param student id de l'élève
  *
  * type : génère les types ADD_MALUS_[PENDING/REJECTED/FULFILLED] automatiquement à récupérer dans le reducer.
  * payload : Promise contenant erreur si rejected ou le malus ajouté si réussi.
  * @returns {{type: string, payload: Promise}}
  */
-export function addMalus(student: Student) {
+export function addMalus(studentId: number) {
     return {
         type: ADD_MALUS,
-        payload: StudentAPI.addMalus(student)
+        payload: StudentAPI.addMalus(studentId)
     }
 }

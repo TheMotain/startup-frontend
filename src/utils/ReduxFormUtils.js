@@ -6,6 +6,7 @@ import React from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
 import {DatePicker} from "material-ui";
+import moment from "moment/moment";
 
 /************************/
 /*    INPUT RENDERERS   */
@@ -34,13 +35,20 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
         {...custom}
     />
 
+);
 
-);export const renderDatePicker = ({input, label, meta: {touched, error}, custom}: Object) => (
+export const renderDatePicker = ({input, label, meta: {touched, error}, custom}: Object) => (
     <DatePicker
         hintText={label}
         floatingLabelText={label}
+        formatDate={(date) => moment(date).format("Do MMMM YYYY")}
+        openToYearSelection={true}
+        shouldDisableDate={(date)=>{if(date > new Date()) return true;
+            return false}}
         errorText={touched && error}
         {...input}
+        onChange={(event, value)=>{input.onChange(value)}}
+
         {...custom}
     />
 );
