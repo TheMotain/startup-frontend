@@ -3,7 +3,6 @@
 import StudentAPI from "../api/StudentAPI";
 import type {Student} from "../types/Student";
 import type {WsPoints} from "../types/WsPoints";
-import type {Points} from "../types/Points";
 
 export const ADD_STUDENT = "ADD_STUDENT";
 export const ADD_STUDENT_PENDING = ADD_STUDENT + "_PENDING";
