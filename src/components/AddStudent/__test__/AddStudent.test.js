@@ -56,7 +56,7 @@ describe('<AddStudent />', () => {
         wrapper.instance().handleSubmit({
             studentFirstName: "Jean",
             studentLastName: "Bon",
-            born: new Date("10/12/1992")
+            born: new Date("10/11/1992 10:00")
         });
 
         expect(onAddStudent.mock.calls.length).toBe(1);
