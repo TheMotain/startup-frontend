@@ -38,7 +38,7 @@ async function getPoints(studentId: number) {
  * @returns {Promise<any>}
  */
 async function addBonus(studentId: number) {
-    return await ApiInstance.put("/points", {
+    return await ApiInstance.post("/points", {
         "bonus": 1,
         "idStudent": studentId,
         "malus": 0
@@ -51,7 +51,7 @@ async function addBonus(studentId: number) {
  * @returns {Promise<any>}
  */
 async function addMalus(studentId: number) {
-    return await ApiInstance.put("/points", {
+    return await ApiInstance.post("/points", {
         "bonus": 0,
         "idStudent": studentId,
         "malus": 1

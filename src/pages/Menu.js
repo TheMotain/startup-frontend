@@ -52,7 +52,7 @@ class Menu extends Component<Props, State> {
         return (
             <div>
                 <AppBar
-                    title={<Link to={"/"} ><span class="appBarTitle">LudiClasse</span></Link>}
+                    title={<Link to={"/"} ><span className="appBarTitle">LudiClasse</span></Link>}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
                 />

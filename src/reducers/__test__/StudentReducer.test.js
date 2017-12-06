@@ -1,6 +1,7 @@
 import studentReducer from "../StudentReducer";
 import * as StudentSelectors from "../StudentReducer";
 import type {Student} from "../../types/Student";
+import type {Points} from "../../types/Points";
 
 describe("StudentReducer.js", () => {
 
@@ -61,7 +62,7 @@ describe("StudentReducer.js", () => {
                 posting: true,
                 posted: false
             },
-            classes: {
+            students: {
                 byId: {},
                 allIds: []
             }
@@ -83,7 +84,7 @@ describe("StudentReducer.js", () => {
                 posting: false,
                 posted: true
             },
-            classes: {
+            students: {
                 byId: {1: student},
                 allIds: [1]
             }
@@ -103,7 +104,7 @@ describe("StudentReducer.js", () => {
                 posting: true,
                 posted: false
             },
-            classes: {
+            students: {
                 byId: {},
                 allIds: []
             }
@@ -277,20 +278,24 @@ describe("StudentReducer.js", () => {
                 updating: true,
                 updated: false
             },
-            classes: {
-                byId: {}
+            students: {
+                byId: {
+                    [1]: {
+                        points: {
+                            bonus: 1,
+                            malus: 0,
+                            idSudent: 1
+                        }
+                    }
+                }
             }
         };
 
         // Example of data returned by the API Call
-        let student: Student = {
-            id : 1,
-            firstName : "Jean",
-            lastName: "Bon",
-            born: "2017-11-28T13:48:43.089Z",
-            idClass : 1,
-            bonus : 0,
-            malus : 0
+        let points: Points = {
+            bonus : 2,
+            malus : 0,
+            idStudent: 1
         };
 
         let expected = {
@@ -298,14 +303,16 @@ describe("StudentReducer.js", () => {
                 updating: false,
                 updated: true
             },
-            classes: {
-                byId: {1: student}
+            students: {
+                byId: {1: {
+                    points: points
+                }}
             }
         };
 
         let actual = studentReducer(initialValue, {
             type: "ADD_BONUS_FULFILLED",
-            payload: student
+            payload: points
         });
 
         expect(actual).toEqual(expected);
@@ -362,7 +369,7 @@ describe("StudentReducer.js", () => {
                 updating: true,
                 updated: false
             },
-            classes: {
+            students: {
                 byId: {}
             }
         };
@@ -383,7 +390,7 @@ describe("StudentReducer.js", () => {
                 updating: false,
                 updated: true
             },
-            classes: {
+            students: {
                 byId: {1: student}
             }
         };

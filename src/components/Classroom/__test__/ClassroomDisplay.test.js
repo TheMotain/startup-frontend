@@ -19,17 +19,27 @@ describe('<ClassroomDisplay />', () => {
                 firstName : "Jean",
                 lastName: "Bon",
                 born: "2017-11-28T13:48:43.089Z",
-                idClass : 1,
-                bonus : 20,
-                malus : 1
+                classroom: {
+                    id: 1
+                },
+                points: {
+                    bonus : 20,
+                    malus : 1,
+                    idStudent: 1
+                },
             }, {
                 id : 2,
                 firstName : "Jeanne",
                 lastName: "Bonne",
                 born: "2016-11-28T13:48:43.089Z",
-                idClass : 1,
-                bonus : 10,
-                malus : 3
+                classroom: {
+                    id: 1
+                },
+                points: {
+                    bonus : 20,
+                    malus : 1,
+                    idStudent: 2
+                }
             }],
             classroom:{
                 id : 1,

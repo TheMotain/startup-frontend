@@ -5,8 +5,8 @@ import update from "immutability-helper";
 import type {Student} from "../types/Student";
 
 /**
- * Etat du state class :
- * classes:
+ * Etat du state studnet :
+ * students:
  *  byId: map idClasse => classe
  *  allIds: Tableau idStudents
  *
@@ -50,9 +50,6 @@ const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
         case StudentActions.ADD_BONUS_PENDING: return addBonusPending(state);
         case StudentActions.ADD_BONUS_FULFILLED: return addBonusFulfilled(state, action);
         case StudentActions.ADD_BONUS_REJECTED: return addBonusRejected(state, action);
-        case StudentActions.ADD_MALUS_PENDING: return addMalusPending(state);
-        case StudentActions.ADD_MALUS_FULFILLED: return addMalusFulfilled(state, action);
-        case StudentActions.ADD_MALUS_REJECTED: return addMalusRejected(state, action);
 
         default: return state
     }
@@ -81,7 +78,7 @@ function addStudentFulfilled(state: State, action: ReducerUtils.Action){
         postStatus: {
             $set: ReducerUtils.updatePosted(state.postStatus),
         },
-        classes: {
+        students: {
             byId: {
                 [studentId]: {
                     $set: student
@@ -153,19 +150,20 @@ function addBonusPending(state: State){
 
 function addBonusFulfilled(state: State, action: ReducerUtils.Action){
 
-    let student: Student = action.payload;
+    let points: Points = action.payload;
 
-    if (student.id === undefined) return state;
-    let studentId: number = student.id;
+    let idStudent: number = points.idStudent;
 
     return update(state, {
         updateStatus: {
             $set: ReducerUtils.updateUpdated(state.updateStatus),
         },
-        classes: {
+        students: {
             byId: {
-                [studentId]: {
-                    $set: student
+                [idStudent]: {
+                    points: {
+                        $set: points
+                    }
                 }
             }
         }
@@ -173,46 +171,6 @@ function addBonusFulfilled(state: State, action: ReducerUtils.Action){
 }
 
 function addBonusRejected(state: State, action: ReducerUtils.Action){
-
-    return update(state, {
-        updateStatus: {
-            $set: ReducerUtils.updateUpdateError(state.updateStatus, action.payload)
-        }
-    });
-}
-
-function addMalusPending(state: State){
-
-    return update(state, {
-        updateStatus: {
-            $set: ReducerUtils.updateUpdating(state.updateStatus)
-        }
-    });
-
-}
-
-function addMalusFulfilled(state: State, action: ReducerUtils.Action){
-
-    let student: Student = action.payload;
-
-    if (student.id === undefined) return state;
-    let studentId: number = student.id;
-
-    return update(state, {
-        updateStatus: {
-            $set: ReducerUtils.updateUpdated(state.updateStatus),
-        },
-        classes: {
-            byId: {
-                [studentId]: {
-                    $set: student
-                }
-            }
-        }
-    });
-}
-
-function addMalusRejected(state: State, action: ReducerUtils.Action){
 
     return update(state, {
         updateStatus: {

@@ -43,11 +43,15 @@ export const renderDatePicker = ({input, label, meta: {touched, error}, custom}:
         floatingLabelText={label}
         formatDate={(date) => moment(date).format("Do MMMM YYYY")}
         openToYearSelection={true}
-        shouldDisableDate={(date)=>{if(date > new Date()) return true;
-            return false}}
+        shouldDisableDate={(date) => date > new Date()}
         errorText={touched && error}
-        {...input}
-        onChange={(event, value)=>{input.onChange(value)}}
+
+        onChange={(event, value)=>{
+            input.onChange(value)
+        }}
+        onDismiss={() => {
+            input.onBlur();
+        }}
 
         {...custom}
     />
@@ -128,6 +132,7 @@ export const alpha = (value: any) => {
  * @returns undefined if there is no error, the error string else.
  */
 export const required = (value: any) => {
+    console.log(value);
     return FormUtils.isEmpty(value) ? "Ce champ est obligatoire." : undefined;
 };
 

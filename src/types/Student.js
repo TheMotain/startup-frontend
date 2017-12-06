@@ -1,5 +1,5 @@
 // @flow
-
+import type {Points} from "./Points";
 
 /**
  * type student
@@ -11,6 +11,7 @@
  * bonus: nombre de point bonus de l'élève
  * malus: nombre de point malus de l'élève
  */
+
 export type Student = {
     id?: number,
     firstName: string,
@@ -19,8 +20,5 @@ export type Student = {
     classroom: {
         id: number
     },
-    points: {
-        bonus: number,
-        malus: number,
-        student: {}
-    }};
+    points: Points
+};

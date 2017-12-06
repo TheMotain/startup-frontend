@@ -103,7 +103,7 @@ class ClassroomDisplay extends React.Component<Props, State> {
                 <TableRowColumn>
                     <FlatButton
                         style={{color:'#008000'}}
-                        label={student.points.bonus}
+                        label={student.points.bonus + ""}
                         labelPosition="before"
                         icon={<Plus/>}
                         onClick={this.handleAddBonus.bind(this, student.id)}
@@ -112,14 +112,13 @@ class ClassroomDisplay extends React.Component<Props, State> {
                 <TableRowColumn>
                     <FlatButton
                         style={{color:'#FF0000'}}
-                        label={student.points.malus}
+                        label={student.points.malus  + ""}
                         labelPosition="before"
                         icon={<Minus/>}
                         onClick={this.handleAddMalus.bind(this, student.id)}
                     />
                 </TableRowColumn>
                 <TableRowColumn>{student.points.bonus - student.points.malus}</TableRowColumn>
-                {this.state.serverErrors.map(error => <p>{error}</p>)}
             </TableRow>
 
         );

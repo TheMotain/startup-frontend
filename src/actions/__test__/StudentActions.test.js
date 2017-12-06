@@ -65,65 +65,19 @@ describe("studentActions.js", async () => {
 
     test('addBonus', () => {
 
-        let returnedStudent = {
-            "id" : 1,
-            "firstName" : "Jean",
-            "lastName": "Bon",
-            "born": "2017-11-28T13:48:43.089Z",
-            "idClass" : 1,
-            "bonus" : 0,
-            "malus" : 0
+        let returnedPoints = {
+            idStudent: 1,
+            bonus: 1,
+            malus: 1
         };
 
-        mock.onPut('/bonus').reply(200, returnedStudent);
+        mock.onPost('/points').reply(200, returnedPoints);
 
-        let student: Student = {
-            id : 1,
-            firstName : "Jean",
-            lastName: "Bon",
-            born: "2017-11-28T13:48:43.089Z",
-            idClass : 1,
-            bonus : 0,
-            malus : 0
-        };
-
-        let actual = StudentActions.addBonus(student);
+        let actual = StudentActions.addBonus(1);
 
         expect(actual.type).toEqual(StudentActions.ADD_BONUS);
         expect(actual.payload).toBeInstanceOf(Promise);
 
-        actual.payload.then((res) => expect(res).toEqual(returnedStudent));
-    });
-
-    test('addMalus', () => {
-
-        let returnedStudent = {
-            "id" : 1,
-            "firstName" : "Jean",
-            "lastName": "Bon",
-            "born": "2017-11-28T13:48:43.089Z",
-            "idClass" : 1,
-            "bonus" : 0,
-            "malus" : 0
-        };
-
-        mock.onPut('/malus').reply(200, returnedStudent);
-
-        let student: Student = {
-            id : 1,
-            firstName : "Jean",
-            lastName: "Bon",
-            born: "2017-11-28T13:48:43.089Z",
-            idClass : 1,
-            bonus : 0,
-            malus : 0
-        };
-
-        let actual = StudentActions.addMalus(student);
-
-        expect(actual.type).toEqual(StudentActions.ADD_MALUS);
-        expect(actual.payload).toBeInstanceOf(Promise);
-
-        actual.payload.then((res) => expect(res).toEqual(returnedStudent));
+        actual.payload.then((res) => expect(res).toEqual(returnedPoints));
     });
 });

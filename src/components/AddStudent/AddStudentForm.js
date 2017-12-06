@@ -2,7 +2,7 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import RaisedButton from "material-ui/RaisedButton";
-import {renderTextField, renderDatePicker, required, minLength2, alphaNum} from "../../utils/ReduxFormUtils";
+import {alphaNum, minLength2, renderDatePicker, renderTextField, required} from "../../utils/ReduxFormUtils";
 import ValidateButton from "../ValidateButton/ValidateButton";
 
 /**
@@ -20,7 +20,7 @@ let AddStudentForm = props => {
      * invalid => boolean à faux si le formulaire est invalide. Vrai sinon.
      * onCancel => fonction donné lors de l'instanciation du composant. Appelé lors d'un clique sur le bouton annuler.
      */
-    const {valid, onCancel, handleSubmit, isLoading, formatDate} = props;
+    const {valid, onCancel, handleSubmit, isLoading} = props;
 
     return (
         <form onSubmit={handleSubmit} className="add-student-form">
