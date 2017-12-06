@@ -3,6 +3,7 @@ import * as StudentActions from "../actions/StudentActions";
 import * as ReducerUtils from "./ReducerUtils";
 import update from "immutability-helper";
 import type {Student} from "../types/Student";
+import type {WsPoints} from "../types/WsPoints";
 
 /**
  * Etat du state studnet :
@@ -50,6 +51,8 @@ const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
         case StudentActions.ADD_BONUS_PENDING: return addBonusPending(state);
         case StudentActions.ADD_BONUS_FULFILLED: return addBonusFulfilled(state, action);
         case StudentActions.ADD_BONUS_REJECTED: return addBonusRejected(state, action);
+
+        case StudentActions.WS_POINT_CHANGE: return pointsChangeRt(state, action);
 
         default: return state
     }
@@ -158,6 +161,23 @@ function addBonusFulfilled(state: State, action: ReducerUtils.Action){
         updateStatus: {
             $set: ReducerUtils.updateUpdated(state.updateStatus),
         },
+        students: {
+            byId: {
+                [idStudent]: {
+                    points: {
+                        $set: points
+                    }
+                }
+            }
+        }
+    });
+}
+
+function pointsChangeRt(state: State, action: ReducerUtils.Action){
+    let points: WsPoints = action.payload;
+    let idStudent: number = points.student.id;
+
+    return update(state, {
         students: {
             byId: {
                 [idStudent]: {

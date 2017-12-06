@@ -2,6 +2,7 @@
 
 import StudentAPI from "../api/StudentAPI";
 import type {Student} from "../types/Student";
+import type {WsPoints} from "../types/WsPoints";
 
 export const ADD_STUDENT = "ADD_STUDENT";
 export const ADD_STUDENT_PENDING = ADD_STUDENT + "_PENDING";
@@ -58,7 +59,7 @@ export function getStudents() {
 
     return {
         type: GET_STUDENTS,
-        payload:StudentAPI.getStudents()
+        payload: StudentAPI.getStudents()
     }
 }
 
@@ -83,5 +84,16 @@ export function addMalus(studentId: number) {
     return {
         type: ADD_BONUS,
         payload: StudentAPI.addMalus(studentId)
+    }
+}
+
+
+export const WS_POINT_CHANGE = "WS_POINT_CHANGE";
+
+export function addBonusRt(wsPoints: WsPoints) {
+
+    return {
+        type: WS_POINT_CHANGE,
+        payload: wsPoints,
     }
 }

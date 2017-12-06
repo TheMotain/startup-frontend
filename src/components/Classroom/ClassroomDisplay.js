@@ -12,6 +12,7 @@ import {
 import type * as ReducerUtils from "../../reducers/ReducerUtils";
 import BackCover from "../BackCover/BackCover";
 import AddStudent from "../AddStudent/AddStudent";
+import * as StudentListeners from "../../api/listeners/StudentListeners";
 
 type Props = {
     students: Array<Student>,
@@ -62,15 +63,21 @@ class ClassroomDisplay extends React.Component<Props, State> {
         super(props);
         if(!this.props.fetchStatusClass.fetched) this.props.fetchClasses();
         if(!this.props.fetchStatusStudent.fetched) this.props.fetchStudents();
-
     }
+
+
+    componentWillReceiveProps(nextProps: Props) {
+        nextProps.students.forEach((student: Student) => {
+            StudentListeners.listenPointChange(student.id);
+        });
+    }
+
 
     /**
      * Fonction appelée pour ajouter un point Bonus
      * @param student est l'élève qui a un point bonus ajouté.
      */
     handleAddBonus(studentId: number){
-
         this.props.onAddBonus(studentId).then(() => {},(errors) => {
             this.setState({
                 serverErrors: errors
