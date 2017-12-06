@@ -60,13 +60,10 @@ describe('<AddStudent />', () => {
         });
 
         expect(onAddStudent.mock.calls.length).toBe(1);
-        expect(onAddStudent.mock.calls[0][0]).toEqual({
-            firstName: "Jean",
-            lastName: "Bon",
-            born: "1992-10-11T23:00:00.000Z",
-            idClass: 1
-        });
-
+        expect(onAddStudent.mock.calls[0][0].firstName).toEqual("Jean");
+        expect(onAddStudent.mock.calls[0][0].lastName).toEqual("Bon");
+        expect(onAddStudent.mock.calls[0][0].born).toContain("1992-10-11");
+        expect(onAddStudent.mock.calls[0][0].idClass).toEqual(1);
     });
 
 });
