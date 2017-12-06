@@ -3,6 +3,7 @@
  * Différent selon prod ou dev.
  */
 let ENDPOINT;
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
     ENDPOINT = "http://149.202.179.212:8080/prod/";
 } else if (process.env.NODE_ENV === 'developpement'){
