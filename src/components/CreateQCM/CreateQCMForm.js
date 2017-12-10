@@ -172,7 +172,7 @@ let CreateQCMForm = props => {
             />
 
 
-            <FieldArray name="choices" component={renderAnswers}/>
+            <FieldArray name="choices" component={renderQuestions}/>
 
             <div>
                 <ValidateButton
