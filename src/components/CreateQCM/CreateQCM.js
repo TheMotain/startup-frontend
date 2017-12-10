@@ -1,13 +1,13 @@
 // @flow
 import React, {Component} from 'react'
-import CreateQuestionForm from "./CreateQCMForm";
+import CreateQCMForm from "./CreateQCMForm";
 import Dialog from "material-ui/Dialog";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
 import AddButton from "../Common/AddButton";
 
 type Props = {
-    onPostQCM: (QCM),
+    onPostQCM: (QCM) => Promise<QCM>,
     postStatus: ReducerUtils.PostStatus,
     classId: number
 }
@@ -52,20 +52,21 @@ class CreateQCM extends Component<Props, State> {
     onSubmit(form: Object) {
         let qcm: QCM = {
             idClass: this.props.classId,
-            instruction: "Instructions",
-            questions: [form],
-            title: "Ceci est le titre du QCM"
+            instruction: form.instructions,
+            questions: form.questions,
+            title: form.title
         };
 
         console.log(qcm);
+        console.log(form);
 
-        /*this.props.onPostQCM(qcm).then(() => {
+        this.props.onPostQCM(qcm).then(() => {
             this.handleClose();
         }, (errors) => {
             this.setState({
                 serverErrors: errors
             });
-        });*/
+        });
     }
 
     render() {
@@ -73,12 +74,13 @@ class CreateQCM extends Component<Props, State> {
             <div>
                 <AddButton onClick={this.handleOpen.bind(this)}/>
                 <Dialog
-                    title="Créer une classe"
+                    title="Créer un QCM"
                     modal={true}
                     open={this.state.open}
                     className="dialog-title"
-                >
-                    <CreateQuestionForm
+                    autoScrollBodyContent={true}
+                    style={{top:"-100px"}}>
+                    <CreateQCMForm
                         onSubmit={this.onSubmit.bind(this)}
                         onCancel={this.handleClose.bind(this)}
                         isLoading={this.props.postStatus.posting}

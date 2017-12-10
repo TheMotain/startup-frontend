@@ -1,8 +1,7 @@
 // @flow
-import * as ClassActions from "../actions/ClassActions";
-import type {Classroom} from "../types/Classroom";
 import * as ReducerUtils from "./ReducerUtils";
 import update from "immutability-helper";
+import * as QCMAction from "../actions/QCMActions";
 
 /**
  * Etat du state class :
@@ -28,11 +27,11 @@ const initialState: State = {
  */
 const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
     switch (action.type) {
-        case ClassActions.POST_CLASS_PENDING:
+        case QCMAction.POST_QCM_PENDING:
             return postQCMPending(state, action);
-        case ClassActions.POST_CLASS_FULFILLED:
+        case QCMAction.POST_QCM_FULFILLED:
             return postQCMFulfilled(state, action);
-        case ClassActions.POST_CLASS_REJECTED:
+        case QCMAction.POST_QCM_REJECTED:
             return postQCMRejected(state, action);
 
         default:

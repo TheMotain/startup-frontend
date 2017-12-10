@@ -2,13 +2,18 @@
 import RaisedButton from "material-ui/RaisedButton";
 import React from "react";
 import {Field, FieldArray, reduxForm} from "redux-form";
-import {renderTextField, required, renderCheckbox, alphaNum} from "../../utils/ReduxFormUtils";
-import {List, ListItem} from 'material-ui/List';
+import {renderTextField, required, renderCheckbox, alphaNum, numeric} from "../../utils/ReduxFormUtils";
+import Plus from "material-ui/svg-icons/content/add"
 
 import ValidateButton from "../ValidateButton/ValidateButton";
 import Subheader from 'material-ui/Subheader';
 import IconButton from 'material-ui/IconButton';
-import BlockIcon from 'material-ui/svg-icons/content/block';
+import Delete from 'material-ui/svg-icons/action/delete';
+
+import {
+    Card, CardActions, CardHeader, CardText, FlatButton, List, ListItem, Table, TableBody, TableFooter, TableRow,
+    TableRowColumn
+} from "material-ui";
 
 
 /**
@@ -26,53 +31,146 @@ let CreateQCMForm = props => {
     const {handleSubmit, valid, onCancel, isLoading} = props;
 
 
-    const renderAnswers = ({fields}) => {
+    const renderAnswers = ({fields, question}) => {
+
         return (
-            <List>
-                <ListItem type="button" onClick={() => fields.push({good: false})}>
-                    Ajouter une réponse +
-                </ListItem>
-                <Subheader>Réponses :</Subheader>
+            <div>
+                <Table
+                    bodyStyle={{"max-height":'200px'}}
+                    selectable={false}
+                    style={{
+                        width: '150%',
+                        maxWidth: 'none',}}>
+                    <TableBody
+                        displayRowCheckbox={false}>
 
-                {fields.map((choices, index) => (
-                    <ListItem
-                        disabled={true}
-                        key={index}
-                        rightIconButton={
-                            <IconButton onClick={() => fields.remove(index)}>
-                                <BlockIcon />
-                            </IconButton>
-                        }
-                    >
-                        <Field
-                            name={`${choices}.choice`}
-                            type="text"
-                            validate={[required]}
-                            component={renderTextField}
-                            label={`Réponse #${index + 1}`}
-                        />
+                        <Subheader> Réponses: </Subheader>
 
-                        <Field
-                            name={`${choices}.good`}
-                            component={renderCheckbox}
-                        />
-                    </ListItem>
-                ))}
-            </List>
+                    {
+                        fields.map((choices, index) => (
+                        <TableRow key={index}>
+                            <TableRowColumn>
+                            <Field
+                                name={`${question}.${choices}.choice`}
+                                type="text"
+                                validate={[required]}
+                                component={renderTextField}
+                                label={`Réponse #${index + 1}`}/>
+
+                            <Field
+                                label={"Réponse correcte"}
+                                name={`${question}.${choices}.good`}
+                                component={renderCheckbox}/>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <IconButton onClick={() => fields.remove(index)}>
+                                    <Delete
+                                       color={'#afafaf'}
+                                  />
+                                </IconButton>
+                            </TableRowColumn>
+                        </TableRow>
+
+                    ))
+
+                    }
+
+                    </TableBody>
+                </Table>
+                <FlatButton
+                    label="Ajouter une réponse supplémentaire"
+                    labelPosition="after"
+                    icon={<Plus/> }
+                    onClick={() => fields.push({good: false})}
+                    style={{color:'#afafaf'}}
+                    labelStyle={{"text-transform" : "none",
+                        "font-weight": "normal"}}
+
+                />
+            </div>
+
         );
     };
 
+    const renderQuestions = ({fields}) => {
+        return (
+            <div>
+
+                <Subheader> Questions: </Subheader>
+
+                {
+                    fields.map((questions, index) => (
+                        <Card key={index}>
+                            <CardText>
+                                <Field
+                                    name={`${questions}.query`}
+                                    type="text"
+                                    validate={[required]}
+                                    component={renderTextField}
+                                    label={`Question #${index + 1}`}
+                                />
+
+                                <Field
+                                    name={`${questions}.nbPoints`}
+                                    type="text"
+                                    validate={[required, numeric]}
+                                    component={renderTextField}
+                                    label={`Nombre de points`}
+                                />
+                                <FieldArray name={`${questions}.choices`} component={renderAnswers} question={questions}/>
+                            </CardText>
+
+                            <CardActions>
+
+                                <IconButton onClick={() => fields.remove(index)}>
+                                    <Delete
+                                        color={'#afafaf'}
+                                    />
+                                </IconButton>
+
+                            </CardActions>
+                        </Card>
+
+
+                    ))
+                }
+                <FlatButton
+                    label="Ajouter une question"
+                    labelPosition="after"
+                    icon={<Plus/> }
+                    onClick={() => fields.push({good: false})}
+                    style={{color:'#afafaf'}}
+                    labelStyle={{"text-transform" : "none",
+                        "font-weight": "normal"}}
+                />
+
+            </div>
+
+        );
+    };
+
+
     return (
-        <form onSubmit={handleSubmit} className="create-class-form">
+        <form onSubmit={handleSubmit} className="create-qcm-form">
+
             <Field
-                name="query"
+                name="title"
                 component={renderTextField}
-                label="Intitulé de la question"
+                label="Titre du QCM"
                 validate={[required]}
+            /><br/>
+
+            <Field
+                name="instructions"
+                component={renderTextField}
+                label="Instructions du QCM"
             />
 
 
-            <FieldArray name="choices" component={renderAnswers}/>
+            <FieldArray name="questions" component={renderQuestions}/>
+
+
+
 
             <div>
                 <ValidateButton

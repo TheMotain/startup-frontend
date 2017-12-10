@@ -8,9 +8,9 @@ export const POST_QCM_FULFILLED = POST_QCM + "_FULFILLED";
 export const POST_QCM_REJECTED = POST_QCM + "_REJECTED";
 
 
-export function postQCM(newClass: QCM) {
+export function postQCM(newQCM: QCM) {
     return {
         type: POST_QCM,
-        payload: QCMAPI.postQCM(newClass)
+        payload: QCMAPI.postQCM(newQCM)
     }
 }

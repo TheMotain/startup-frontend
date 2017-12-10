@@ -11,7 +11,7 @@ const mapStateToProps = (store, props) => ({
 });
 
 const mapDispatchToProps = {
-    onPostQCL: QCMActions.postQCM
+    onPostQCM: QCMActions.postQCM
 };
 
 const CreateQCMContainer = connect(

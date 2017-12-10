@@ -10,6 +10,7 @@ import type {QCM} from "../types/QCM";
  * @returns {Promise<any>}
  */
 function postQCM(qcm: QCM) {
+    console.log(qcm);
     return ApiInstance.post("/qcm", qcm);
 }
 
