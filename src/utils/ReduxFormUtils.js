@@ -44,6 +44,14 @@ export const renderCheckbox = ({ input, label }: Object) => (
     />
 );
 
+export const renderCustomCheckbox = ({ input}: Object) => (
+    <input
+        type="checkbox"
+        checked={!!input.value}
+        onChange={input.onChange}
+    />
+);
+
 /*********************/
 /* FIELD VERIFICATOR */
 /*********************/

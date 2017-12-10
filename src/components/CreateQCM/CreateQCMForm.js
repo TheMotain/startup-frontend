@@ -33,6 +33,12 @@ let CreateQCMForm = props => {
 
     const renderAnswers = ({fields, question}) => {
 
+        // At leas 1 input
+        if (fields.length === 0) {
+            fields.push({good: false});
+        }
+
+
         return (
             <div>
                 <Table
@@ -151,12 +157,11 @@ let CreateQCMForm = props => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="create-qcm-form">
-
+        <form onSubmit={handleSubmit} className="create-class-form">
             <Field
-                name="title"
+                name="query"
                 component={renderTextField}
-                label="Titre du QCM"
+                label="Intitulé de la question"
                 validate={[required]}
             /><br/>
 
@@ -167,10 +172,7 @@ let CreateQCMForm = props => {
             />
 
 
-            <FieldArray name="questions" component={renderQuestions}/>
-
-
-
+            <FieldArray name="choices" component={renderAnswers}/>
 
             <div>
                 <ValidateButton
