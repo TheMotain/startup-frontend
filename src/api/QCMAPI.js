@@ -20,16 +20,21 @@ function postQCM(qcm: QCM) {
  * @returns {Promise<any>}
  */
 function fetchQCMPerClass(idClass: number) {
-    return ApiInstance.post("/qcm/classroom"+ idClass);
+    return ApiInstance.get("/qcm/classroom"+ idClass);
 }
 
+function fetchQCMs() {
+    return ApiInstance.get("/qcm");
+}
 
-
-
+function fetchAnswers(qcmId: number) {
+    return ApiInstance.post(`/resultQcm/${qcmId}`);
+}
 
 
 export default {
     postQCM: postQCM,
-    fetchQCMPerClass: fetchQCMPerClass
-
+    fetchQCMPerClass: fetchQCMPerClass,
+    fetchQCMs: fetchQCMs,
+    fetchAnswers: fetchAnswers
 };

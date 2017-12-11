@@ -5,14 +5,17 @@ import ListQCM from '../../components/ListQCM/ListQCM'
 import * as QCMSelectors from "../../reducers/QCMReducer";
 import * as QCMActions from "../../actions/QCMActions";
 
-const mapStateToProps = (state) => ({
-
-    qcmList: QCMSelectors.getQCMPerClass(state),
-    fetchStatus: QCMSelectors.getFetchStatus(state)
-});
+const mapStateToProps = (state) => {
+    // TODO get from page
+    let idClass = 1;
+    return {
+        qcmList: QCMSelectors.getQCMPerClass(state, idClass),
+        fetchStatus: QCMSelectors.getFetchQCMStatus(state)
+    }
+};
 
 const mapDispatchToProps = {
-    fetchQCMPerClass: QCMActions.fetchQCMPerClass
+    fetchQCMs: QCMActions.fetchQCMs
 };
 
 const ListQCMContainer = connect(

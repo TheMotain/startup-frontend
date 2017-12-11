@@ -12,15 +12,13 @@ import QCMItem from "./QCMItem";
 /**
  * Propriétés :
  * qcmList: la liste des QCMs
- * idClassroom : l'id de la classe
  * fetchQCMPerClass : la fonction à appeler pour récupérer les qcm pour une classe
  * fetchStatus : état de la requête de récupération des classes.
  */
 type Props = {
 
     qcmList: Array<QCM>,
-    idClassroom: number,
-    fetchQCMPerClass: (number) => Promise<any>,
+    fetchQCMs: () => Promise<any>,
     fetchStatus: ReducerUtils.FetchStatus
 }
 
@@ -37,12 +35,7 @@ class ListQCM extends React.Component<Props, State> {
      */
     constructor(props: Props) {
         super(props);
-        this.props.fetchQCMPerClass(this.props.idClassroom);
-    }
-
-    componentWillReceiveProps(newProps: Props){
-
-        newProps.fetchQCMPerClass(newProps.idClassroom);
+        this.props.fetchQCMs();
     }
 
     /**
@@ -54,16 +47,16 @@ class ListQCM extends React.Component<Props, State> {
             <TableRow>
                 <TableRowColumn>
                     <Card>
-                      <CardHeader
-                        title={qcm.title}
-                        actAsExpander={true}
-                        showExpandableButton={true}
-                      />
-                    <CardText expandable={true}>
+                        <CardHeader
+                            title={qcm.title}
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                        />
+                        <CardText expandable={true}>
 
-                        <QCMItem qcm={qcm}/>
+                            <QCMItem qcm={qcm}/>
 
-                    </CardText>
+                        </CardText>
 
 
                     </Card>
@@ -71,9 +64,6 @@ class ListQCM extends React.Component<Props, State> {
 
                 </TableRowColumn>
             </TableRow>
-
-
-
         );
     }
 

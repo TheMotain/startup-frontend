@@ -7,12 +7,6 @@ export const POST_QCM_PENDING = POST_QCM + "_PENDING";
 export const POST_QCM_FULFILLED = POST_QCM + "_FULFILLED";
 export const POST_QCM_REJECTED = POST_QCM + "_REJECTED";
 
-export const FETCH_QCM_PER_CLASS = "FETCH_QCM_PER_CLASS";
-export const FETCH_QCM_PER_CLASS_PENDING = FETCH_QCM_PER_CLASS + "_PENDING";
-export const FETCH_QCM_PER_CLASS_FULFILLED = FETCH_QCM_PER_CLASS + "_FULFILLED";
-export const FETCH_QCM_PER_CLASS_REJECTED = FETCH_QCM_PER_CLASS + "_REJECTED";
-
-
 export function postQCM(newQCM: QCM) {
     return {
         type: POST_QCM,
@@ -20,9 +14,30 @@ export function postQCM(newQCM: QCM) {
     }
 }
 
-export function fetchQCMPerClass(idClass: number){
+export const FETCH_QCM = "FETCH_QCM";
+export const FETCH_QCM_PENDING = FETCH_QCM + "_PENDING";
+export const FETCH_QCM_FULFILLED = FETCH_QCM + "_FULFILLED";
+export const FETCH_QCM_REJECTED = FETCH_QCM + "_REJECTED";
+
+export function fetchQCMs() {
     return {
-        type: FETCH_QCM_PER_CLASS,
-        payload: QCMAPI.fetchQCMPerClass(idClass)
+        type: FETCH_QCM,
+        payload: QCMAPI.fetchQCMs()
+    }
+}
+
+
+export const FETCH_ANSWERS = "FETCH_ANSWERS";
+export const FETCH_ANSWERS_PENDING = FETCH_ANSWERS + "_PENDING";
+export const FETCH_ANSWERS_FULFILLED = FETCH_ANSWERS + "_FULFILLED";
+export const FETCH_ANSWERS_REJECTED = FETCH_ANSWERS + "_REJECTED";
+
+export function fetchAnswers(qcmId: number) {
+    return {
+        type: FETCH_ANSWERS,
+        payload: QCMAPI.fetchAnswers(qcmId),
+        meta: {
+            qcmId: qcmId
+        }
     }
 }
