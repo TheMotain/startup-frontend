@@ -5,10 +5,11 @@ import type {Student} from "../../types/Student";
 import type {StudentAnswers} from "../../types/StudentAnswer";
 import type {Question} from "../../types/Question";
 import type {Answer} from "../../types/Answer";
+import {listenNewAnswer} from "../../api/listeners/QCMListeners";
 
 type Props = {
     qcmId: number,
-    qcm: QCM,
+    qcm: ?QCM,
     students: Array<Student>,
     answerMap: { [number]: StudentAnswers },
     fetchStudents: () => Promise<any>,
@@ -22,11 +23,17 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
 
     state = {};
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.props.fetchStudents();
         this.props.fetchQCMs();
         this.props.fetchAnswers(this.props.qcmId)
+    }
+
+    componentWillReceiveProps(newProps: Props) {
+        if(newProps.qcm) {
+            listenNewAnswer(newProps.qcm.id);
+        }
     }
 
 
@@ -81,6 +88,7 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
     render() {
         return (
             <div>
+                {this.props.qcm ? this.props.qcm.title : ""}
                 <table>
                     <tr>
                         <th>Question</th>

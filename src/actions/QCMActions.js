@@ -41,3 +41,16 @@ export function fetchAnswers(qcmId: number) {
         }
     }
 }
+
+
+export const WS_NEW_ANSWER = "WS_NEW_ANSWER";
+
+export function wsNewAnswer(answer: WSAnswer, qcmId: number) {
+    return {
+        type: WS_NEW_ANSWER,
+        payload: answer,
+        meta: {
+            qcmId: qcmId
+        }
+    }
+}

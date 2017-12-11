@@ -4,6 +4,7 @@ import update from "immutability-helper";
 import * as QCMAction from "../actions/QCMActions";
 import type {QCM} from "../types/QCM";
 import type {StudentAnswers} from "../types/StudentAnswer";
+import type {WSAnswer} from "../types/WSAnswer";
 
 /**
  * Etat du state class :
@@ -76,12 +77,48 @@ const reducer = (state: State = initialState, action: ReducerUtils.Action) => {
         case QCMAction.FETCH_ANSWERS_REJECTED:
             return fetchAnswersRejected(state, action);
 
+        case QCMAction.WS_NEW_ANSWER:
+            return addNewAnswer(state, action);
+
 
         default:
             return state
     }
 };
 
+
+const addNewAnswer = (state: State, action: ReducerUtils.Action) => {
+    let qcmId = action.meta.qcmId;
+    let wsAnswer: WSAnswer = action.payload;
+
+    let lastAnswers = state.answers[qcmId];
+
+    if(!lastAnswers) lastAnswers = newAnswerState({});
+
+    if(!lastAnswers.byId[wsAnswer.idAnswer])
+        lastAnswers.byId[wsAnswer.idAnswer] = {
+            studentIds: [],
+            answerId: wsAnswer.idAnswer
+        };
+
+    let newAnswer = update(lastAnswers, {
+        byId: {
+            [wsAnswer.idAnswer]: {
+                studentIds: {
+                    $push: [wsAnswer.idStudent]
+                }
+            }
+        }
+    });
+
+    return update(state, {
+        answers: {
+            [qcmId]: {
+                $set: newAnswer
+            }
+        }
+    });
+};
 
 const postQCMRejected = (state: State, action: ReducerUtils.Action) => {
     return update(state, {
