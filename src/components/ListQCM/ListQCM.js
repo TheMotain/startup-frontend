@@ -2,7 +2,7 @@
 import React from "react";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
-import {Card, CardHeader, CardText, List, Table, TableBody, TableRow, TableRowColumn} from "material-ui";
+import {Table, TableBody, TableRow} from "material-ui";
 import QCMItem from "./QCMItem";
 
 /**

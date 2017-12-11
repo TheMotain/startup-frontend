@@ -9,8 +9,7 @@ import AddButton from "../Common/AddButton";
 type Props = {
     onPostQCM: (QCM) => Promise<QCM>,
     postStatus: ReducerUtils.PostStatus,
-    classId: number,
-    redirectToQcm: (qcmId) => void
+    classId: number
 }
 
 type State = {

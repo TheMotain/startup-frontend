@@ -11,12 +11,11 @@ type Props = {
 class QCMItem extends React.Component<Props, State> {
     render() {
         return (
-                <TableRowColumn key={3}>
-                    <Link activeStyle={{color:"black"}} to={`/qcm/${this.props.qcm.id}/`}>
-                        {this.props.qcm.title}
-                    </Link>
-
-                </TableRowColumn>
+            <TableRowColumn key={3}>
+                <Link activeStyle={{color: "black"}} to={`/qcm/${this.props.qcm.id}/`}>
+                    {this.props.qcm.title}
+                </Link>
+            </TableRowColumn>
         );
     }
 }
