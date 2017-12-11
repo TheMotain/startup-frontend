@@ -1,7 +1,6 @@
 // @flow
 
 import React, {Component} from "react";
-import ListQCMContainer from "../containers/ListQCM/ListQCMContainer";
 import QCMAnswersContainer from "../containers/QCMAnswersContainer/QCMAnswersContainer";
 
 type Props = {

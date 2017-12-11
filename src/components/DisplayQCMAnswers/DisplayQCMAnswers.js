@@ -71,7 +71,6 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
     }
 
     renderQuestion(students: Array<Student>, question: Question) {
-        console.log(question);
         return (
             <TableRow>
                 <TableRowColumn>{question.query}</TableRowColumn>
