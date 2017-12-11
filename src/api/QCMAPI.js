@@ -28,7 +28,7 @@ function fetchQCMs() {
 }
 
 function fetchAnswers(qcmId: number) {
-    return ApiInstance.post(`/resultQcm/${qcmId}`);
+    return ApiInstance.get(`/resultQcm/${qcmId}`);
 }
 
 

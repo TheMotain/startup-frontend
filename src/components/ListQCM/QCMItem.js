@@ -9,17 +9,15 @@ type Props = {
     qcm: QCM
 }
 
-type State = {
-    open: boolean
-}
-
 class QCMItem extends React.Component<Props, State> {
     render() {
         return (
+            <Link to={`/qcm/${this.props.qcm.id}/`}>
                 <ListItem
                     key={3}
-                    primaryText={this.props.qcm.className}
+                    primaryText={this.props.qcm.title}
                 />
+            </Link>
         );
     }
 }

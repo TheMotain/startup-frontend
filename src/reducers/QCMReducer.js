@@ -154,7 +154,7 @@ function getAnswerMap(answers: Array<Object>) {
     let map = {};
 
     answers.forEach(item => {
-        let answerId = item.anwser.id;
+        let answerId = item.answer.id;
         let studentId = item.student.id;
 
         if (!map[answerId]) {
@@ -207,7 +207,12 @@ const getState = (store: Object) => {
 
 export const getQCMPerClass = (store: Object, classId: number) => {
     let state = getState(store);
-    return state.qcmList.allIds.map(id => state.qcmList.byId[id]).filter((qcm: QCM) => qcm.idClass === classId);
+    return state.qcms.allIds.map(id => state.qcms.byId[id]).filter((qcm: QCM) => qcm.classroom.id === classId);
+};
+
+export const getQCM = (store: Object, qcmId: number) => {
+    let state = getState(store);
+    return state.qcms.byId[qcmId];
 };
 
 export const getPostStatus = (store: Object) => {
@@ -217,6 +222,7 @@ export const getPostStatus = (store: Object) => {
 
 export const getQcmAnswers = (store: Object, qcmId: number) => {
     let state = getState(store);
+    if(!state.answers[qcmId]) return {};
     return state.answers[qcmId].byId;
 };
 

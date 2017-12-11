@@ -2,7 +2,7 @@
 import React from "react";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
-import {Card, CardHeader, CardText, Table, TableBody, TableRow, TableRowColumn} from "material-ui";
+import {Card, CardHeader, CardText, List, Table, TableBody, TableRow, TableRowColumn} from "material-ui";
 import QCMItem from "./QCMItem";
 
 /**
@@ -12,7 +12,6 @@ import QCMItem from "./QCMItem";
  * fetchStatus : état de la requête de récupération des classes.
  */
 type Props = {
-
     qcmList: Array<QCM>,
     fetchQCMs: () => Promise<any>,
     fetchStatus: ReducerUtils.FetchStatus
@@ -21,11 +20,7 @@ type Props = {
 type State = {}
 
 /**
- <<<<<<< HEAD
  * Affiche la liste des QCM d'une classe.
- =======
- * Affiche la liste des qcm.
- >>>>>>> develop
  */
 class ListQCM extends React.Component<Props, State> {
 
@@ -44,36 +39,15 @@ class ListQCM extends React.Component<Props, State> {
      */
     renderQcmList() {
         return this.props.qcmList.map((qcm: QCM) =>
-            <TableRow>
-                <TableRowColumn>
-                    <Card>
-                        <CardHeader
-                            title={qcm.title}
-                            actAsExpander={true}
-                            showExpandableButton={true}
-                        />
-                        <CardText expandable={true}>
-
-                            <QCMItem qcm={qcm}/>
-
-                        </CardText>
-
-
-                    </Card>
-
-
-                </TableRowColumn>
-            </TableRow>
+            <QCMItem qcm={qcm} key={qcm.id}/>
         );
     }
 
     render() {
         return (
-            <Table>
-                <TableBody displayRowCheckbox={false}>
-                    {this.renderQcmList()}
-                </TableBody>
-            </Table>
+            <List>
+                {this.renderQcmList()}
+            </List>
         )
     }
 }

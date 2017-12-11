@@ -5,9 +5,8 @@ import ListQCM from '../../components/ListQCM/ListQCM'
 import * as QCMSelectors from "../../reducers/QCMReducer";
 import * as QCMActions from "../../actions/QCMActions";
 
-const mapStateToProps = (state) => {
-    // TODO get from page
-    let idClass = 1;
+const mapStateToProps = (state, props) => {
+    let idClass = props.idClass;
     return {
         qcmList: QCMSelectors.getQCMPerClass(state, idClass),
         fetchStatus: QCMSelectors.getFetchQCMStatus(state)
