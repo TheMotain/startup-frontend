@@ -4,14 +4,19 @@
  */
 let ENDPOINT;
 if (process.env.NODE_ENV === 'production') {
-    ENDPOINT = "http://149.202.179.212:8080/prod/";
+    let base = "http://149.202.179.212:8080/prod/";
+    ENDPOINT = base;
+    WS_ENDPOINT = base + "ws/"
 } else {
-    ENDPOINT = "http://149.202.179.212:8080/dev/";
+    let base = "http://149.202.179.212:8080/dev/";
+    ENDPOINT = base;
+    WS_ENDPOINT = base + "ws/"
 }
 
 /**
  * Objet contenant toutes les configs nécessaires.
  */
 export default {
-    ENDPOINT: ENDPOINT
+    ENDPOINT: ENDPOINT,
+    WS_ENDPOINT: WS_ENDPOINT
 }

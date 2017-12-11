@@ -2,6 +2,7 @@
 
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import Configs from "../configs/Configs";
 
 type ChannelInfo = {
     channelName: string,
@@ -16,7 +17,7 @@ type ChannelResponse = {
     table: string
 }
 
-const socket = new SockJS('http://localhost:8080/ws');
+const socket = new SockJS(Configs.WS_ENDPOINT);
 const stompClient = Stomp.over(socket);
 
 let pendingSubscribtions: Array<ChannelInfo> = [];
