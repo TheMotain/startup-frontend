@@ -129,9 +129,20 @@ const postQCMRejected = (state: State, action: ReducerUtils.Action) => {
 };
 
 const postQCMFulfilled = (state: State, action: ReducerUtils.Action) => {
+    let newQcm: QCM = action.payload;
     return update(state, {
         postStatus: {
             $set: ReducerUtils.updatePosted(state.postStatus),
+        },
+        qcms: {
+            byId: {
+                [newQcm.id]: {
+                    $set: newQcm
+                }
+            },
+            allIds: {
+                $push: [newQcm.id]
+            }
         }
     });
 };

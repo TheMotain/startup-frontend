@@ -26,7 +26,7 @@ function subscribePendingList() {
             subscriptions[channelName].unsubscribe();
         }
 
-        let sub = stompClient.subscribe(channelName, (response) => {
+        let sub = stompClient.subscribe(channelName, async (response) => {
             handler(JSON.parse(response.body));
         });
 

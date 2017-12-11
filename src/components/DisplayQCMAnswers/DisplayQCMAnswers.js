@@ -6,6 +6,7 @@ import type {StudentAnswers} from "../../types/StudentAnswer";
 import type {Question} from "../../types/Question";
 import type {Answer} from "../../types/Answer";
 import {listenNewAnswer} from "../../api/listeners/QCMListeners";
+import {Subheader, Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui";
 
 type Props = {
     qcmId: number,
@@ -31,7 +32,7 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps(newProps: Props) {
-        if(newProps.qcm) {
+        if (newProps.qcm) {
             listenNewAnswer(newProps.qcm.id);
         }
     }
@@ -50,7 +51,7 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
             }
         });
 
-        if(isFalse) return "red";
+        if (isFalse) return "red";
         if (hasGood) return "green";
         return "white"
     }
@@ -59,28 +60,35 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
         let color = this.getColor(student, studentAnswersMap, answers);
 
         return (
-            <td style={{
-                width: 20,
-                height: 20,
-                backgroundColor: color
-            }}></td>
+            <TableRowColumn>
+                <div style={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: color
+                }}></div>
+            </TableRowColumn>
         )
     }
 
     renderQuestion(students: Array<Student>, question: Question) {
         console.log(question);
         return (
-            <tr>
-                <td>{question.query}</td>
+            <TableRow>
+                <TableRowColumn>{question.query}</TableRowColumn>
                 {students.map(student => this.renderStudentAnswer(student, this.props.answerMap, question.answers))}
-            </tr>
+            </TableRow>
         )
     }
 
     renderQcm(qcm: ?QCM) {
-        if(qcm) {
+        if (qcm) {
             return qcm.questions.map((question: Question) => {
-                return this.renderQuestion(this.props.students, question);
+                return (
+
+                    this.renderQuestion(this.props.students, question)
+
+
+                );
             });
         }
     }
@@ -88,16 +96,20 @@ class DisplayQCMAnswers extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                {this.props.qcm ? this.props.qcm.title : ""}
-                <table>
-                    <tr>
-                        <th>Question</th>
-                        {this.props.students.map((student: Student) => {
-                            return <th>{student.firstName} {student.lastName}</th>
-                        })}
-                    </tr>
-                    {this.renderQcm(this.props.qcm)}
-                </table>
+                <Subheader>{this.props.qcm ? this.props.qcm.title : ""}</Subheader>
+                <Table selectable={false}>
+                    <TableHeader displaySelectAll={false}>
+                        <TableRow>
+                            <TableHeaderColumn>Question</TableHeaderColumn>
+                            {this.props.students.map((student: Student) => {
+                                return (<TableHeaderColumn> {student.firstName} {student.lastName}</TableHeaderColumn>);
+                            })}
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false} selectable={false}>
+                        {this.renderQcm(this.props.qcm)}
+                    </TableBody>
+                </Table>
             </div>
         );
     }
