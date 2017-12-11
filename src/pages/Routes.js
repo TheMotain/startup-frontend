@@ -3,6 +3,9 @@ import React, {Component} from 'react'
 import Menu from "./Menu";
 import {IndexRoute, Route, Router} from 'react-router'
 import Classes from "./Classes";
+import Classroom from "./Classroom";
+import QCMList from "./QCMList";
+import QCMAnswers from "./QCMAnswers";
 
 type Props = {
     history: Object
@@ -19,8 +22,10 @@ class Routes extends Component<Props, State> {
         return (
             <Router history={this.props.history}>
                 <Route path="/" component={Menu}>
-                    <IndexRoute component={Classes}/>
-                    <Route path="classes" component={Classes}/>
+                    <IndexRoute component={Classes} />
+                    <Route path="classes" component={Classes} />
+                    <Route path="classes/:id" component={Classroom} />
+                    <Route path="qcm/:id" component={QCMAnswers}/>
                 </Route>
             </Router>
         );

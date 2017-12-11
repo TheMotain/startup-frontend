@@ -2,7 +2,6 @@
 import axios from "axios";
 import Configs from "../configs/Configs";
 
-
 /**
  * Crée une instance axios préconfiguré (header, baseURL...).
  * Gère la propagation d'erreur selon l'erreur retournée par le back.
