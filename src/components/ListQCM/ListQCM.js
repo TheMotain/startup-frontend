@@ -39,15 +39,19 @@ class ListQCM extends React.Component<Props, State> {
      */
     renderQcmList() {
         return this.props.qcmList.map((qcm: QCM) =>
-            <QCMItem qcm={qcm} key={qcm.id}/>
+            <TableRow>
+                <QCMItem qcm={qcm} key={qcm.id}/>
+            </TableRow>
         );
     }
 
     render() {
         return (
-            <List>
+            <Table>
+                <TableBody displayRowCheckbox={false}>
                 {this.renderQcmList()}
-            </List>
+                </TableBody>
+            </Table>
         )
     }
 }

@@ -25,7 +25,6 @@ class Routes extends Component<Props, State> {
                     <IndexRoute component={Classes} />
                     <Route path="classes" component={Classes} />
                     <Route path="classes/:id" component={Classroom} />
-                    <Route path="classes/:id/qcmList" component={QCMList} />
                     <Route path="qcm/:id" component={QCMAnswers}/>
                 </Route>
             </Router>
