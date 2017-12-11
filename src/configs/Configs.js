@@ -3,6 +3,7 @@
  * Différent selon prod ou dev.
  */
 let ENDPOINT;
+let WS_ENDPOINT;
 if (process.env.NODE_ENV === 'production') {
     let base = "http://149.202.179.212:8080/prod/";
     ENDPOINT = base;
