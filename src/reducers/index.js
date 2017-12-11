@@ -5,6 +5,7 @@ import {reducer as formReducer} from "redux-form";
 import {routerReducer} from 'react-router-redux'
 import classReducer from "./ClassReducer"
 import QCMReducer from "./QCMReducer"
+import studentReducer from "./StudentReducer"
 
 /**
  * Combinaison des reducers.
@@ -12,8 +13,9 @@ import QCMReducer from "./QCMReducer"
  */
 const reducers = combineReducers({
     form: formReducer,
-    routing: routerReducer,
     classState: classReducer,
+    studentState: studentReducer,
+    routing: routerReducer,
     QCMState: QCMReducer
 });
 

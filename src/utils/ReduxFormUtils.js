@@ -6,6 +6,8 @@ import React from "react";
 import * as FormUtils from "./FormUtils";
 import TextField from "material-ui/TextField";
 import Checkbox from 'material-ui/Checkbox'
+import {DatePicker} from "material-ui";
+import moment from "moment/moment";
 
 /************************/
 /*    INPUT RENDERERS   */
@@ -31,6 +33,27 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
         floatingLabelText={label}
         errorText={touched && error}
         {...input}
+        {...custom}
+    />
+
+);
+
+export const renderDatePicker = ({input, label, meta: {touched, error}, custom}: Object) => (
+    <DatePicker
+        hintText={label}
+        floatingLabelText={label}
+        formatDate={(date) => moment(date).format("Do MMMM YYYY")}
+        openToYearSelection={true}
+        shouldDisableDate={(date) => date > new Date()}
+        errorText={touched && error}
+
+        onChange={(event, value)=>{
+            input.onChange(value)
+        }}
+        onDismiss={() => {
+            input.onBlur();
+        }}
+
         {...custom}
     />
 );
