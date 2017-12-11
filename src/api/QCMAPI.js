@@ -14,13 +14,27 @@ function postQCM(qcm: QCM) {
     return ApiInstance.post("/qcm", qcm);
 }
 
-function getQCMList(){
+/**
+ * Requête GET sur /qcm/classroom avec qcm en body.
+ * @param idClass
+ * @returns {Promise<any>}
+ */
+function fetchQCMPerClass(idClass: number) {
+    return ApiInstance.get("/qcm/classroom"+ idClass);
+}
+
+function fetchQCMs() {
     return ApiInstance.get("/qcm");
 }
 
+function fetchAnswers(qcmId: number) {
+    return ApiInstance.get(`/resultQcm/${qcmId}`);
+}
 
 
 export default {
     postQCM: postQCM,
-    getQCMList: getQCMList
+    fetchQCMPerClass: fetchQCMPerClass,
+    fetchQCMs: fetchQCMs,
+    fetchAnswers: fetchAnswers
 };

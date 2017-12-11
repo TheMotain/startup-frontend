@@ -6,14 +6,16 @@ import classroomImage from "./classroom.png"
 import Plus from "material-ui/svg-icons/content/add-circle"
 import Minus from "material-ui/svg-icons/content/remove-circle"
 import {
-    Card, CardText, CircularProgress, FlatButton, Table, TableBody, TableRow,
-    TableRowColumn
+    Card, CardText, CircularProgress, FlatButton, Tab, Table, TableBody, TableRow,
+    TableRowColumn, Tabs
 } from "material-ui";
 import type * as ReducerUtils from "../../reducers/ReducerUtils";
 import BackCover from "../BackCover/BackCover";
 import AddStudent from "../AddStudent/AddStudent";
 import * as StudentListeners from "../../api/listeners/StudentListeners";
 import CreateQCMContainer from "../../containers/CreateQCM/CreateQCMContainer";
+import ListQCMContainer from "../../containers/ListQCM/ListQCMContainer";
+import palette from "../../configs/theme"
 
 type Props = {
     students: Array<Student>,
@@ -147,17 +149,28 @@ class ClassroomDisplay extends React.Component<Props, State> {
                 <BackCover
                     title={this.props.classroom.className}
                     image={classroomImage}/>
-                <AddStudent classroom={this.props.classroom}
-                            postStatus={this.props.postStatus}
-                            onAddStudent={this.props.onAddStudent}/>
-                <CardText>
-                    <CreateQCMContainer classId={this.props.classroom.id}/>
-                    <Table>
-                        <TableBody displayRowCheckbox={false}>
-                            {this.renderClass()}
-                        </TableBody>
-                    </Table>
-                </CardText>
+
+                <Tabs tabItemContainerStyle={{backgroundColor:"#720000"}}>
+                    <Tab label="Élèves">
+                        <AddStudent classroom={this.props.classroom}
+                                    postStatus={this.props.postStatus}
+                                    onAddStudent={this.props.onAddStudent}/>
+                        <CardText>
+                            <Table>
+                                <TableBody displayRowCheckbox={false}>
+                                    {this.renderClass()}
+                                </TableBody>
+                            </Table>
+                        </CardText>
+                    </Tab>
+                    <Tab label="QCM">
+                        <CreateQCMContainer classId={this.props.classroom.id}/>
+                        <ListQCMContainer idClass={+this.props.classroom.id}/>
+                    </Tab>
+
+                </Tabs>
+
+
             </Card>
         )
     }

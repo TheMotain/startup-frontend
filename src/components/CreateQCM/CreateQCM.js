@@ -5,12 +5,12 @@ import Dialog from "material-ui/Dialog";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
 import AddButton from "../Common/AddButton";
-import {RaisedButton} from "material-ui";
 
 type Props = {
     onPostQCM: (QCM) => Promise<QCM>,
     postStatus: ReducerUtils.PostStatus,
-    classId: number
+    classId: number,
+    redirectToQcm: (qcmId) => void
 }
 
 type State = {
@@ -58,8 +58,6 @@ class CreateQCM extends Component<Props, State> {
             title: form.title
         };
 
-        console.log(form);
-
         this.props.onPostQCM(qcm).then(() => {
             this.handleClose();
         }, (errors) => {
@@ -72,7 +70,7 @@ class CreateQCM extends Component<Props, State> {
     render() {
         return (
             <div>
-                <RaisedButton label="Envoyer un qcm" onClick={this.handleOpen.bind(this)} />
+                <AddButton label="Envoyer un qcm" onClick={this.handleOpen.bind(this)} />
                 <Dialog
                     title="Créer un QCM"
                     modal={true}

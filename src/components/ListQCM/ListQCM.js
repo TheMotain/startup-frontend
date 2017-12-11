@@ -2,26 +2,25 @@
 import React from "react";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui";
-import type {Classroom} from "../../types/Classroom";
+import {Card, CardHeader, CardText, List, Table, TableBody, TableRow, TableRowColumn} from "material-ui";
+import QCMItem from "./QCMItem";
 
 /**
  * Propriétés :
- * qcmList : la liste des qcm à afficher
- * fetchQCMList : la fonction à appeler pour récupérer les qcms
- * fetchStatus : état de la requête de récupération des qcms.
+ * qcmList: la liste des QCMs
+ * fetchQCMPerClass : la fonction à appeler pour récupérer les qcm pour une classe
+ * fetchStatus : état de la requête de récupération des classes.
  */
 type Props = {
     qcmList: Array<QCM>,
-    classes: Array<Classroom>,
-    fetchQCMList: () => Promise<any>,
+    fetchQCMs: () => Promise<any>,
     fetchStatus: ReducerUtils.FetchStatus
 }
 
 type State = {}
 
 /**
- * Affiche la liste des qcm.
+ * Affiche la liste des QCM d'une classe.
  */
 class ListQCM extends React.Component<Props, State> {
 
@@ -31,41 +30,29 @@ class ListQCM extends React.Component<Props, State> {
      */
     constructor(props: Props) {
         super(props);
-        this.props.fetchQCMList();
+        this.props.fetchQCMs();
     }
 
     /**
-     * Affiche la liste des QCM (renvoie un tableau de QCMs)
+     * Affiche la lsite des qcm (renvoie un tableau de ClassItem)
      * @returns {Array}
      */
-    renderQCMList() {
-
-        {console.log(this.props.qcmList)}
-        return (this.props.qcmList.map((qcm: QCM) =>
-                            <TableRow onRowClick="">
-                                <TableRowColumn>{qcm.title}</TableRowColumn>
-                                <TableRowColumn>
-                                    {this.props.classes.map((classroom: Classroom) => {
-                                        if (classroom.id === qcm.idClass)
-                                            classroom.className
-                                    })}
-                                </TableRowColumn>
-                            </TableRow>));
+    renderQcmList() {
+        return this.props.qcmList.map((qcm: QCM) =>
+            <TableRow>
+                <QCMItem qcm={qcm} key={qcm.id}/>
+            </TableRow>
+        );
     }
 
     render() {
         return (
             <Table>
-                <TableHeader displaySelectAll={false}>
-                    <TableRow>
-                        <TableHeaderColumn>Titre du QCM</TableHeaderColumn>
-                        <TableHeaderColumn>Classe</TableHeaderColumn>
-                    </TableRow>
-                </TableHeader>
                 <TableBody displayRowCheckbox={false}>
-                    {this.renderQCMList()}
+                {this.renderQcmList()}
                 </TableBody>
-            </Table>);
+            </Table>
+        )
     }
 }
 

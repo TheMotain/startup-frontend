@@ -2,6 +2,7 @@
 
 import React, {Component} from "react";
 import ListQCMContainer from "../containers/ListQCM/ListQCMContainer";
+import QCMAnswersContainer from "../containers/QCMAnswersContainer/QCMAnswersContainer";
 
 type Props = {
     params: Object
@@ -10,16 +11,15 @@ type Props = {
 type State = {
 }
 
-class QCMList extends Component<Props, State> {
-
+class QCMAnswers extends Component<Props, State> {
     render() {
 
         return (
             <div>
-                <ListQCMContainer idClass={+this.props.params.id}/>
+                <QCMAnswersContainer qcmId={+this.props.params.id}/>
             </div>
         );
     }
 }
 
-export default QCMList;
+export default QCMAnswers;
