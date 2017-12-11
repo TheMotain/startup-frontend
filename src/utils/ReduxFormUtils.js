@@ -35,6 +35,17 @@ export const renderTextField = ({input, label, meta: {touched, error}, custom}: 
     />
 );
 
+export const renderNumberField = ({input, label, meta: {touched, error}, custom}: Object) => (
+    <TextField
+        type="number"
+        hintText={label}
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        {...custom}
+    />
+);
+
 
 export const renderCheckbox = ({ input, label }: Object) => (
     <Checkbox
