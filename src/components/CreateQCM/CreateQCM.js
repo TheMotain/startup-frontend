@@ -51,7 +51,7 @@ class CreateQCM extends Component<Props, State> {
      */
     onSubmit(form: Object) {
         let qcm: QCM = {
-            idClass: this.props.classId,
+            classroom: {id: this.props.classId},
             instruction: form.instructions,
             questions: form.questions,
             title: form.title

@@ -14,6 +14,13 @@ function postQCM(qcm: QCM) {
     return ApiInstance.post("/qcm", qcm);
 }
 
+function getQCMList(){
+    return ApiInstance.get("/qcm");
+}
+
+
+
 export default {
-    postQCM: postQCM
+    postQCM: postQCM,
+    getQCMList: getQCMList
 };
