@@ -5,6 +5,7 @@ import Dialog from "material-ui/Dialog";
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
 import AddButton from "../Common/AddButton";
+import {RaisedButton} from "material-ui";
 
 type Props = {
     onPostQCM: (QCM) => Promise<QCM>,
@@ -57,7 +58,6 @@ class CreateQCM extends Component<Props, State> {
             title: form.title
         };
 
-        console.log(qcm);
         console.log(form);
 
         this.props.onPostQCM(qcm).then(() => {
@@ -72,7 +72,7 @@ class CreateQCM extends Component<Props, State> {
     render() {
         return (
             <div>
-                <AddButton onClick={this.handleOpen.bind(this)}/>
+                <RaisedButton label="Envoyer un qcm" onClick={this.handleOpen.bind(this)} />
                 <Dialog
                     title="Créer un QCM"
                     modal={true}

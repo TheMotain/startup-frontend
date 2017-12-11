@@ -13,6 +13,7 @@ import type * as ReducerUtils from "../../reducers/ReducerUtils";
 import BackCover from "../BackCover/BackCover";
 import AddStudent from "../AddStudent/AddStudent";
 import * as StudentListeners from "../../api/listeners/StudentListeners";
+import CreateQCMContainer from "../../containers/CreateQCM/CreateQCMContainer";
 
 type Props = {
     students: Array<Student>,
@@ -150,12 +151,12 @@ class ClassroomDisplay extends React.Component<Props, State> {
                             postStatus={this.props.postStatus}
                             onAddStudent={this.props.onAddStudent}/>
                 <CardText>
+                    <CreateQCMContainer classId={this.props.classroom.id}/>
                     <Table>
                         <TableBody displayRowCheckbox={false}>
                             {this.renderClass()}
                         </TableBody>
                     </Table>
-
                 </CardText>
             </Card>
         )

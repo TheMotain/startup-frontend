@@ -1,4 +1,5 @@
 import type {Question} from "./Question";
+import type {Classroom} from "./Classroom";
 
 export type QCM = {
     id?: number,

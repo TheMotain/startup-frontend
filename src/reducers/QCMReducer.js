@@ -7,9 +7,9 @@ import type {StudentAnswers} from "../types/StudentAnswer";
 
 /**
  * Etat du state class :
- * classes:
- *  byId: map idClasse => classe
- *  allIds: Tableau idClass
+ * qcm:
+ *  byId: map idQCM => qcm
+ *  allIds: Tableau idQCM
  *
  * postStatus: état de la requête d'ajout de classe.
  */
@@ -142,7 +142,6 @@ const fetchQCMPending = (state: State, action: ReducerUtils.Action) => {
     });
 };
 
-
 const fetchAnswersRejected = (state: State, action: ReducerUtils.Action) => {
     return update(state, {
         fetchAnswersStatus: {
@@ -194,7 +193,6 @@ const fetchAnswersPending = (state: State, action: ReducerUtils.Action) => {
         }
     });
 };
-
 
 export default reducer;
 

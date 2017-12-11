@@ -1,12 +1,8 @@
 // @flow
 import React from "react";
-
 import * as ReducerUtils from "../../reducers/ReducerUtils";
 import type {QCM} from "../../types/QCM";
-import {
-    Card, CardHeader, CardText, Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
-    TableRowColumn
-} from "material-ui";
+import {Card, CardHeader, CardText, Table, TableBody, TableRow, TableRowColumn} from "material-ui";
 import QCMItem from "./QCMItem";
 
 /**
@@ -25,7 +21,11 @@ type Props = {
 type State = {}
 
 /**
+ <<<<<<< HEAD
  * Affiche la liste des QCM d'une classe.
+ =======
+ * Affiche la liste des qcm.
+ >>>>>>> develop
  */
 class ListQCM extends React.Component<Props, State> {
 

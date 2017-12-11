@@ -1,8 +1,6 @@
 // @flow
 
 import React, {Component} from "react";
-import BackCover from "../components/BackCover/BackCover";
-import CreateQCMContainer from "../containers/CreateQCM/CreateQCMContainer";
 import ListQCMContainer from "../containers/ListQCM/ListQCMContainer";
 
 type Props = {
