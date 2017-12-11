@@ -1,6 +1,4 @@
 import * as WsHelper from "./WsHelper";
-import type {WsPoints} from "../../types/WsPoints";
-import * as StudentActions from "../../actions/StudentActions";
 import store from "../../configs/Store";
 import type {WSAnswer} from "../../types/WSAnswer";
 import * as QCMActions from "../../actions/QCMActions";

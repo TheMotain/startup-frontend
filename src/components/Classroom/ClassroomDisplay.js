@@ -6,8 +6,16 @@ import classroomImage from "./classroom.png"
 import Plus from "material-ui/svg-icons/content/add-circle"
 import Minus from "material-ui/svg-icons/content/remove-circle"
 import {
-    Card, CardText, CircularProgress, FlatButton, Tab, Table, TableBody, TableRow,
-    TableRowColumn, Tabs
+    Card,
+    CardText,
+    CircularProgress,
+    FlatButton,
+    Tab,
+    Table,
+    TableBody,
+    TableRow,
+    TableRowColumn,
+    Tabs
 } from "material-ui";
 import type * as ReducerUtils from "../../reducers/ReducerUtils";
 import BackCover from "../BackCover/BackCover";
@@ -15,7 +23,6 @@ import AddStudent from "../AddStudent/AddStudent";
 import * as StudentListeners from "../../api/listeners/StudentListeners";
 import CreateQCMContainer from "../../containers/CreateQCM/CreateQCMContainer";
 import ListQCMContainer from "../../containers/ListQCM/ListQCMContainer";
-import palette from "../../configs/theme"
 
 type Props = {
     students: Array<Student>,

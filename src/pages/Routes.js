@@ -4,7 +4,6 @@ import Menu from "./Menu";
 import {IndexRoute, Route, Router} from 'react-router'
 import Classes from "./Classes";
 import Classroom from "./Classroom";
-import QCMList from "./QCMList";
 import QCMAnswers from "./QCMAnswers";
 
 type Props = {
