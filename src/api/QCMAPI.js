@@ -14,6 +14,22 @@ function postQCM(qcm: QCM) {
     return ApiInstance.post("/qcm", qcm);
 }
 
+/**
+ * Requête GET sur /qcm/classroom avec qcm en body.
+ * @param idClass
+ * @returns {Promise<any>}
+ */
+function fetchQCMPerClass(idClass: number) {
+    return ApiInstance.post("/qcm/classroom"+ idClass);
+}
+
+
+
+
+
+
 export default {
-    postQCM: postQCM
+    postQCM: postQCM,
+    fetchQCMPerClass: fetchQCMPerClass
+
 };
