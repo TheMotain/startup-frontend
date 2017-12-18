@@ -77,9 +77,11 @@ class ClassroomDisplay extends React.Component<Props, State> {
 
 
     componentWillReceiveProps(nextProps: Props) {
-        nextProps.students.forEach((student: Student) => {
-            StudentListeners.listenPointChange(student.id);
-        });
+        if(this.props.students.length !== nextProps.students.length) {
+            nextProps.students.forEach((student: Student) => {
+                StudentListeners.listenPointChange(student.id);
+            });
+        }
     }
 
 
@@ -137,7 +139,6 @@ class ClassroomDisplay extends React.Component<Props, State> {
                 </TableRowColumn>
                 <TableRowColumn>{student.points.bonus - student.points.malus}</TableRowColumn>
             </TableRow>
-
         );
     }
 
