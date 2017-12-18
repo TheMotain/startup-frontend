@@ -27,6 +27,7 @@ describe('<ClassroomDisplay />', () => {
                     malus : 1,
                     idStudent: 1
                 },
+                uuid: "abcdef123456",
             }, {
                 id : 2,
                 firstName : "Jeanne",
@@ -39,7 +40,9 @@ describe('<ClassroomDisplay />', () => {
                     bonus : 20,
                     malus : 1,
                     idStudent: 2
-                }
+                },
+                uuid: "ghijklm123456",
+
             }],
             classroom:{
                 id : 1,
@@ -81,5 +84,5 @@ describe('<ClassroomDisplay />', () => {
         expect(wrapper.find(TableRow).first().key()).toEqual("1");
         expect(wrapper.find(TableRow).last().key()).toEqual("2");
     });
-
+    
 });
