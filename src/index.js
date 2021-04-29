@@ -1,21 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
-import './index.css';
-import MessageListContainer from './containers/Chat/MessageListContainer';
-import AddMessageContainer from './containers/Chat/AddMessageContainer';
-import registerServiceWorker from './registerServiceWorker';
-import store from "./Store";
-import "./api/index";
+// @flow
 
+import React from "react";
+import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import {hashHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
+
+import "./index.css";
+import "./api/listeners/WsHelper";
+
+import store from "./configs/Store";
+import theme from "./configs/theme";
+
+import Routes from "./pages/Routes";
+
+const history = syncHistoryWithStore(hashHistory, store);
+
+/**
+ * Point d'entrée de react sur la page index.html.
+ */
 ReactDOM.render(
-    <Provider store={store}>
-        <div>
-            <MessageListContainer/>
-            <AddMessageContainer />
-        </div>
-    </Provider>
-    ,
+    <MuiThemeProvider muiTheme={theme}>
+        <Provider store={store}>
+            <Routes history={history}/>
+        </Provider>
+    </MuiThemeProvider>,
     document.getElementById('root')
 );
-registerServiceWorker();

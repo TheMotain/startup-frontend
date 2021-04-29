@@ -1,11 +1,22 @@
 // @flow
 
-import { combineReducers } from 'redux'
+import {combineReducers} from "redux";
+import {reducer as formReducer} from "redux-form";
+import {routerReducer} from 'react-router-redux'
+import classReducer from "./ClassReducer"
+import QCMReducer from "./QCMReducer"
+import studentReducer from "./StudentReducer"
 
-import chat from './ChatReducer'
-
+/**
+ * Combinaison des reducers.
+ * @type {Reducer<any>}
+ */
 const reducers = combineReducers({
-    chat
+    form: formReducer,
+    classState: classReducer,
+    studentState: studentReducer,
+    routing: routerReducer,
+    QCMState: QCMReducer
 });
 
 export default reducers;
